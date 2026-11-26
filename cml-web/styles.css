@@ -36,7 +36,9 @@ em { font-family: var(--serif); font-weight: 400; }
 .primary:hover { background: #ecf6ce; }
 .outline { color: var(--paper); border-color: #8c9d98; }
 .outline:hover { background: var(--paper); color: var(--ink); }
-.header { display: flex; align-items: center; justify-content: space-between; height: var(--header-height); padding: 10px max(26px, calc((100% - 1320px) / 2)); gap: 20px; position: sticky; top: 0; z-index: 5; background: #191710b8; backdrop-filter: blur(14px); color: white; border-bottom: 1px solid #ffffff30; }
+.header { display: flex; align-items: center; justify-content: space-between; height: var(--header-height); padding: 10px max(26px, calc((100% - 1320px) / 2)); gap: 20px; position: sticky; top: 0; z-index: 5; color: white; }
+.header::after { content: ''; position: absolute; inset: auto max(20px, calc((100% - 1400px) / 2)) 0; height: 1px; background: #ffffff45; pointer-events: none; }
+.header.is-past-hero { background: #191710; }
 .brand { display: inline-flex; gap: 11px; align-items: center; font-size: 1.16rem; font-weight: 850; line-height: 1; letter-spacing: .08em; white-space: nowrap; }
 .brand small { display: block; letter-spacing: .27em; font-size: .55em; margin-top: 5px; }
 .mark { display: block; width: 31px; height: 34px; background: currentColor; clip-path: polygon(0 100%, 0 35%, 23% 18%, 23% 85%, 39% 85%, 39% 17%, 64% 0, 64% 85%, 78% 85%, 78% 34%, 100% 47%, 100% 100%); }

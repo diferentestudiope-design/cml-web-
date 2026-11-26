@@ -43,6 +43,17 @@ dialog.addEventListener("click", (event) => {
   if (event.target === dialog) dialog.close();
 });
 
+const header = document.querySelector(".header");
+const hero = document.querySelector(".hero");
+
+function updateHeader() {
+  header.classList.toggle("is-past-hero", hero.getBoundingClientRect().bottom <= header.offsetHeight);
+}
+
+window.addEventListener("scroll", updateHeader, { passive: true });
+window.addEventListener("resize", updateHeader);
+updateHeader();
+
 const menu = document.querySelector(".menu");
 const nav = document.querySelector("#navegacion");
 function closeMenu() {
