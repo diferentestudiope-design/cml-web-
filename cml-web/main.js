@@ -78,6 +78,8 @@ const playback = document.querySelector(".slide-playback");
 const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
 let currentSlide = 0;
 let slideTimer;
+let playing = false;
+let hovered = false;
 
 function showSlide(index) {
   currentSlide = index;
@@ -85,9 +87,16 @@ function showSlide(index) {
   slideButtons.forEach((control, controlIndex) => control.setAttribute("aria-pressed", String(controlIndex === index)));
 }
 
-function setPlayback(playing) {
+function syncSlideTimer() {
   clearInterval(slideTimer);
-  slideTimer = playing ? setInterval(() => showSlide((currentSlide + 1) % slides.length), 6500) : undefined;
+  if (playing && !hovered) {
+    slideTimer = setInterval(() => showSlide((currentSlide + 1) % slides.length), 6000);
+  }
+}
+
+function setPlayback(enabled) {
+  playing = enabled;
+  syncSlideTimer();
   playback.textContent = playing ? "Ⅱ" : "▶";
   playback.setAttribute("aria-label", playing ? "Pausar carrusel" : "Reproducir carrusel");
 }
@@ -103,7 +112,14 @@ slideButtons.forEach((button, index) => {
     showSlide(index);
   });
 });
-playback.addEventListener("click", () => setPlayback(!slideTimer));
+playback.addEventListener("click", () => setPlayback(!playing));
+for (const eventName of ["pointerenter", "pointerleave"]) {
+  hero.addEventListener(eventName, (event) => {
+    if (event.pointerType !== "mouse") return;
+    hovered = eventName === "pointerenter";
+    syncSlideTimer();
+  });
+}
 motionPreference.addEventListener("change", syncMotionPreference);
 syncMotionPreference();
 
