@@ -44,7 +44,7 @@ em { font-family: var(--serif); font-weight: 400; }
 .brand { display: inline-flex; flex: none; align-items: center; }
 .brand-logo { display: block; width: clamp(148px, 10.6vw, 265px); height: auto; object-fit: contain; }
 .header .brand { justify-self: start; }
-.header nav { display: flex; align-items: center; gap: clamp(16px, 2vw, 48px); padding: clamp(10px, .65vw, 17px) clamp(18px, 1.55vw, 46px); border-radius: 999px; background: #ffffff26; backdrop-filter: blur(12px); font-size: clamp(.875rem, .8vw, 1.25rem); font-weight: 650; }
+.header nav { display: flex; align-items: center; gap: clamp(16px, 2vw, 48px); padding: clamp(10px, .65vw, 17px) clamp(18px, 1.55vw, 46px); border-radius: 999px; background: #ffffff26; backdrop-filter: blur(12px); font-family: Manrope, Inter, var(--sans); font-size: clamp(.875rem, .77vw, 1.2rem); font-weight: 600; }
 .header nav a:hover, .footer-bottom a:hover { text-decoration: underline; text-underline-offset: 5px; }
 .header-cta, .hero .primary { background: var(--hero-accent); color: #151518; }
 .header-contact:hover .header-cta, .hero .primary:hover { background: #f6f18a; }
