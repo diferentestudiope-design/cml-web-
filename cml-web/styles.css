@@ -81,7 +81,7 @@ em { font-family: var(--serif); font-weight: 400; }
 .project-previews > * { flex: none; width: clamp(34px, 2.55vw, 65px); height: clamp(34px, 2.55vw, 65px); border: 2px solid white; border-radius: 50%; }
 .project-previews > * + * { margin-left: clamp(-19px, -.75vw, -10px); }
 .project-previews .hero-project-arrow { display: grid; place-items: center; background: var(--hero-accent); color: white; font-size: clamp(1rem, 1.2vw, 1.6rem); transition: transform .2s; }
-#proyecto { background: white; }
+#proyecto { background: white; font-family: Manrope, Inter, var(--sans); }
 .hero-project strong, .hero-project small { display: block; }
 .hero-project small { margin-top: 4px; }
 .hero-project:hover .hero-project-arrow { transform: translate(4px, -4px); }
@@ -95,10 +95,16 @@ em { font-family: var(--serif); font-weight: 400; }
 @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
 .reveal-pending { opacity: 0; translate: 0 22px; transition: opacity .7s, translate .7s; }
 .reveal-pending.is-visible, .reveal-pending:focus-within { opacity: 1; translate: 0 0; }
-.intro-title { text-align: center; }
-.intro-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: clamp(30px, 8vw, 120px); align-items: center; margin-top: 55px; }
+.intro-title { max-width: 980px; margin-inline: auto; text-align: center; }
+.intro-title h2 { font-size: clamp(2.35rem, 4.3vw, 4.6rem); line-height: 1.04; font-weight: 700; text-wrap: balance; }
+.intro-title h2 em { font-family: "Instrument Serif", var(--serif); font-size: 1.12em; }
+.intro-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(28px, 6vw, 88px); align-items: start; margin-top: clamp(34px, 5vw, 72px); }
+.intro-copy { padding-block: clamp(0px, 1vw, 14px); }
+.intro-contact { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: clamp(24px, 4vw, 48px); padding-top: 20px; border-top: 1px solid var(--line); }
+.intro-contact .pill { background: var(--hero-accent); color: white; }
+.intro-contact .pill:hover { background: #9e3d11; }
 .photo { overflow: hidden; border-radius: 5px; background: var(--sand); }
-.intro-grid .photo { aspect-ratio: 1.52; }
+.intro-grid .photo { aspect-ratio: 1.47; border-radius: 16px; }
 .intro-grid .photo img { object-position: center 45%; }
 .lead { font-size: clamp(1.5rem, 2.5vw, 2.4rem); line-height: 1.08; letter-spacing: -.035em; margin-bottom: 16px; }
 .intro-grid p + p, .section-heading > p, .team-roles p { color: var(--muted); }
