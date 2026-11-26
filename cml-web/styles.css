@@ -106,8 +106,17 @@ em { font-family: var(--serif); font-weight: 400; }
 .intro-contact .pill { background: var(--hero-accent); color: white; }
 .intro-contact .pill:hover { background: #9e3d11; }
 .photo { overflow: hidden; border-radius: 5px; background: var(--sand); }
-.intro-grid .photo { aspect-ratio: 1.47; border-radius: 16px; }
-.intro-grid .photo img { object-position: center 45%; }
+.intro-photo { position: relative; }
+.intro-photo-layers { position: relative; aspect-ratio: 3 / 2; }
+.intro-photo-layers img { position: absolute; inset: 0; }
+.intro-photo-base { clip-path: inset(0 0 13% round 16px); }
+.intro-photo-overlay {
+  clip-path: polygon(54.2% 82%, 99% 82%, 100% 100%, 52.5% 100%, 52.2% 96%, 53.4% 91%);
+  mask-image: linear-gradient(black 86%, transparent 100%);
+}
+.intro-photo-caption { position: absolute; inset: auto auto 13% 4.5%; display: grid; gap: 0; transform: translateY(100%); }
+.intro-photo-caption strong { position: absolute; bottom: 100%; padding-bottom: .12em; color: white; font-size: clamp(2rem, 5vw, 5rem); line-height: 1; text-shadow: 0 2px 14px #111a; }
+.intro-photo-caption span { padding-top: .25em; font-size: clamp(.7rem, 1vw, 1rem); font-weight: 700; }
 .section-heading > p, .team-roles p { color: var(--muted); }
 .text-link { display: inline-flex; gap: 18px; align-items: center; font-weight: 700; border-bottom: 1px solid; margin-top: 22px; }
 .catalog { background: var(--sand); }
