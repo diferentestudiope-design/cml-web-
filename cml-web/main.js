@@ -61,14 +61,40 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-const slideButtons = [...document.querySelectorAll(".slide-controls button")];
+const slideButtons = [...document.querySelectorAll(".slide-controls button[aria-pressed]")];
 const slides = [...document.querySelectorAll(".hero-image")];
+const playback = document.querySelector(".slide-playback");
+const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+let currentSlide = 0;
+let slideTimer;
+
+function showSlide(index) {
+  currentSlide = index;
+  slides.forEach((slide, slideIndex) => slide.classList.toggle("active", slideIndex === index));
+  slideButtons.forEach((control, controlIndex) => control.setAttribute("aria-pressed", String(controlIndex === index)));
+}
+
+function setPlayback(playing) {
+  clearInterval(slideTimer);
+  slideTimer = playing ? setInterval(() => showSlide((currentSlide + 1) % slides.length), 6500) : undefined;
+  playback.textContent = playing ? "Ⅱ" : "▶";
+  playback.setAttribute("aria-label", playing ? "Pausar carrusel" : "Reproducir carrusel");
+}
+
+function syncMotionPreference() {
+  playback.hidden = motionPreference.matches;
+  setPlayback(!motionPreference.matches);
+}
+
 slideButtons.forEach((button, index) => {
   button.addEventListener("click", () => {
-    slides.forEach((slide, slideIndex) => slide.classList.toggle("active", slideIndex === index));
-    slideButtons.forEach((control, controlIndex) => control.setAttribute("aria-pressed", String(controlIndex === index)));
+    setPlayback(false);
+    showSlide(index);
   });
 });
+playback.addEventListener("click", () => setPlayback(!slideTimer));
+motionPreference.addEventListener("change", syncMotionPreference);
+syncMotionPreference();
 
 if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const observer = new IntersectionObserver((entries) => {
