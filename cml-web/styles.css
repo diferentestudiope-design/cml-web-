@@ -64,11 +64,11 @@ em { font-family: var(--serif); font-weight: 400; }
 .hero-image.active { opacity: 1; transform: scale(1); }
 .hero::before { content: ''; z-index: -1; background: linear-gradient(90deg, #262a34c7, #1e1e228c 50%, #19191c59); }
 .hero::after { content: ''; z-index: -1; background: #ffffff12; clip-path: polygon(59% 0, 77% 0, 92% 100%, 74% 100%); }
-.hero-content { align-self: center; width: auto; margin-inline: var(--hero-gutter) 8vw; font-family: Inter, var(--sans); padding-block: calc(var(--header-height) + clamp(30px, 5vw, 120px)) clamp(90px, 12svh, 170px); }
-.hero h1 { font-size: clamp(3rem, 5.4vw, 9rem); font-weight: 800; line-height: .9; }
+.hero-content { align-self: center; width: auto; margin-inline: var(--hero-gutter) 8vw; font-family: Manrope, Inter, var(--sans); padding-block: calc(var(--header-height) + clamp(30px, 5vw, 120px)) clamp(90px, 12svh, 170px); }
+.hero h1 { font-size: clamp(3rem, 5.4vw, 9rem); font-weight: 700; line-height: .98; letter-spacing: -.04em; }
 .hero h1 span { display: block; animation: rise .8s both; }
 .hero h1 span + span { font-weight: 300; animation-delay: .12s; }
-.hero h1 em { color: #f3edc6; font-family: "Instrument Serif", var(--serif); font-size: 1.08em; }
+.hero h1 em { color: white; font-family: "Instrument Serif", var(--serif); font-size: 1.1em; }
 .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 26px; margin-top: clamp(25px, 3vw, 48px); animation: rise .8s .24s both; }
 .hero-actions p { max-width: 29ch; color: #f5f1e6; line-height: 1.45; }
 .hero-bottom { display: flex; align-items: end; justify-content: space-between; gap: 20px; padding-left: var(--hero-gutter); }

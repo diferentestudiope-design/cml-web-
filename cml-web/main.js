@@ -74,6 +74,10 @@ document.addEventListener("keydown", (event) => {
 
 const slideButtons = [...document.querySelectorAll(".slide-controls button[aria-pressed]")];
 const slides = [...document.querySelectorAll(".hero-image")];
+const heroTitle = document.querySelector("#hero-title");
+const heroTitleLead = heroTitle.querySelector("span");
+const heroTitleEnding = heroTitle.querySelector("em");
+const heroDescription = document.querySelector(".hero-actions p");
 const playback = document.querySelector(".slide-playback");
 const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
 let currentSlide = 0;
@@ -82,7 +86,20 @@ let playing = false;
 let hovered = false;
 
 function showSlide(index) {
+  if (index === currentSlide) return;
   currentSlide = index;
+  const { title, ending, description } = slides[index].dataset;
+  heroTitleLead.textContent = title;
+  heroTitleEnding.textContent = ending;
+  heroDescription.textContent = description;
+  if (!motionPreference.matches) {
+    for (const element of [heroTitle, heroDescription]) {
+      element.animate([{ opacity: .25, translate: "0 10px" }, { opacity: 1, translate: "0 0" }], {
+        duration: 650,
+        easing: "ease-out",
+      });
+    }
+  }
   slides.forEach((slide, slideIndex) => slide.classList.toggle("active", slideIndex === index));
   slideButtons.forEach((control, controlIndex) => control.setAttribute("aria-pressed", String(controlIndex === index)));
 }
