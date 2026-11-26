@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explora la propuesta residencial de Torres del Mall, sus espacios, tipologías y áreas comunes.">
+  <meta name="theme-color" content="#14282b">
+  <title>Torres del Mall | Tu casa, tu ciudad</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./main.js" defer></script>
+</head>
+<body>
+  <a href="#contenido" class="skip">Saltar al contenido</a>
+  <header class="header">
+    <a class="brand" href="#inicio" aria-label="Torres del Mall, inicio"><span class="mark" aria-hidden="true"></span><span>TORRES <small>DEL MALL</small></span></a>
+    <button class="menu" type="button" aria-expanded="false" aria-controls="navegacion">Menú</button>
+    <nav id="navegacion" aria-label="Principal"><a href="#proyecto">Proyecto</a><a href="#departamentos">Departamentos</a><a href="#espacios">Espacios</a><a href="#equipo">Equipo</a></nav>
+    <a class="pill header-cta" href="#contacto">Contacto <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="contenido">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-images" aria-hidden="true">
+        <img class="hero-image active" src="./assets/hero.jpg" alt="" fetchpriority="high">
+        <img class="hero-image" src="./assets/interior.jpg" alt="">
+        <img class="hero-image" src="./assets/terraza.jpg" alt="">
+      </div>
+      <div class="wrap hero-content">
+        <p class="eyebrow"><span></span> TORRES DEL MALL · PROYECTO RESIDENCIAL</p>
+        <h1 id="hero-title">Tu casa.<br><em>Tu ciudad.</em></h1>
+        <p>Departamentos y espacios compartidos para vivir la ciudad a tu ritmo.</p>
+        <a class="pill primary" href="#departamentos">Explorar departamentos <span aria-hidden="true">↘</span></a>
+      </div>
+      <div class="wrap hero-bottom">
+        <span>Imágenes referenciales</span>
+        <div class="slide-controls" aria-label="Imágenes de portada">
+          <button type="button" aria-label="Ver fachada" aria-pressed="true">01</button>
+          <button type="button" aria-label="Ver interior" aria-pressed="false">02</button>
+          <button type="button" aria-label="Ver terraza" aria-pressed="false">03</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyecto" class="wrap section">
+      <div class="intro-title" data-reveal><p class="eyebrow">EL PROYECTO</p><h2>Un lugar para hacer<br> <em>más tuyo cada día.</em></h2></div>
+      <div class="intro-grid" data-reveal>
+        <figure class="photo"><img src="./assets/torre-a.jpg" loading="lazy" alt="Visualización referencial de una torre residencial con balcones"></figure>
+        <div><p class="lead">El hogar también está en lo que tienes cerca.</p><p>Torres del Mall reúne distintos estilos de departamento y espacios compartidos para acompañarte en tu rutina, desde una tarde tranquila en casa hasta un encuentro al aire libre.</p><a class="text-link" href="#espacios">Conoce los espacios <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+
+    <section id="departamentos" class="catalog section">
+      <div class="wrap">
+        <div class="section-heading" data-reveal><div><p class="eyebrow">DEPARTAMENTOS</p><h2>Encuentra tu <em>espacio.</em></h2></div><p>Explora tres distribuciones referenciales y elige cuál quieres conocer mejor.</p></div>
+        <div class="cards" id="typologies"></div>
+      </div>
+    </section>
+
+    <section class="statement section" aria-labelledby="vision-title">
+      <div class="wrap statement-grid">
+        <img class="statement-first" src="./assets/interior.jpg" alt="" loading="lazy" data-reveal>
+        <div data-reveal><p class="eyebrow">NUESTRA VISIÓN</p><h2 id="vision-title">Vivir cerca<br> cambia <em>todo.</em></h2></div>
+        <img class="statement-last" src="./assets/torre-b.jpg" alt="" loading="lazy" data-reveal>
+      </div>
+    </section>
+
+    <section id="experiencia" class="dark section">
+      <div class="wrap">
+        <div class="section-heading" data-reveal><div><p class="eyebrow">LA EXPERIENCIA</p><h2>Bien pensado,<br><em>bien vivido.</em></h2></div><a class="pill outline" href="#contacto">Consulta el proyecto <span aria-hidden="true">↗</span></a></div>
+        <div class="accordion" data-reveal>
+          <details name="experiencia" open><summary><span>Diseño residencial</span></summary><div class="detail-body"><img src="./assets/interior.jpg" alt="Sala referencial con ventanales" loading="lazy"><p>Ambientes pensados para aprovechar la luz natural y adaptar cada rincón a tu rutina.</p></div></details>
+          <details name="experiencia"><summary><span>Áreas para compartir</span></summary><div class="detail-body"><img src="./assets/terraza.jpg" alt="Terraza referencial en la azotea" loading="lazy"><p>Una propuesta de espacios comunes para conversar, descansar y cambiar de aire sin salir de casa.</p></div></details>
+          <details name="experiencia"><summary><span>Orientación comercial</span></summary><div class="detail-body"><img src="./assets/equipo.jpg" alt="Equipo referencial revisando planos" loading="lazy"><p>Explora las tipologías y prepara tus preguntas sobre distribución, disponibilidad y próximos pasos.</p></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section id="espacios" class="wrap section">
+      <div data-reveal><p class="eyebrow">GALERÍA</p><h2>Dentro y <em>fuera de casa.</em></h2></div>
+      <div class="gallery">
+        <figure data-reveal><div class="photo"><img src="./assets/interior.jpg" alt="Sala luminosa en tonos madera y crema" loading="lazy"></div><figcaption>Interiores <small>Imagen referencial</small></figcaption></figure>
+        <figure data-reveal><div class="photo"><img src="./assets/terraza.jpg" alt="Terraza rodeada de vegetación con vista urbana" loading="lazy"></div><figcaption>Áreas comunes <small>Imagen referencial</small></figcaption></figure>
+        <figure data-reveal><div class="photo"><img src="./assets/torre-c.jpg" alt="Conjunto de torres residenciales al atardecer" loading="lazy"></div><figcaption>Arquitectura <small>Imagen referencial</small></figcaption></figure>
+      </div>
+    </section>
+
+    <section id="beneficios" class="benefits section">
+      <div class="wrap benefit-content">
+        <div data-reveal><p class="eyebrow">CALIDAD DE VIDA</p><h2>La ciudad,<br><em>a tu ritmo.</em></h2></div>
+        <div class="benefit-cards" data-reveal><article><h3>Tu rutina</h3><p>Un hogar flexible para trabajar, descansar o compartir.</p></article><article><h3>Tu comunidad</h3><p>Espacios para encontrarte con quienes viven cerca.</p></article></div>
+      </div>
+    </section>
+
+    <section id="equipo" class="wrap section">
+      <div class="section-heading" data-reveal><div><p class="eyebrow">EQUIPO</p><h2>Las personas<br><em>detrás del proyecto.</em></h2></div><p>Diseño, desarrollo y atención comercial acompañan distintas etapas del proyecto.</p></div>
+      <div class="team" data-reveal>
+        <figure class="photo"><img src="./assets/equipo.jpg" alt="Imagen referencial de profesionales de arquitectura colaborando" loading="lazy"></figure>
+        <div class="team-roles"><article><h3>Arquitectura y diseño</h3><p>Distribuciones y espacios comunes.</p></article><article><h3>Desarrollo</h3><p>Coordinación técnica del proyecto.</p></article><article><h3>Atención comercial</h3><p>Orientación sobre tipologías y consultas.</p></article></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacto" class="section">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div><p class="eyebrow">CONTACTO</p><h2>Hablemos<br><em>de tu hogar.</em></h2><p>Prepara una consulta sobre el departamento que te interesa.</p></div>
+        <form id="contact-form">
+          <p id="contact-mode">Modo demostración. Puedes descargar tu consulta.</p>
+          <label for="nombre">Nombre</label><input id="nombre" name="nombre" required maxlength="100" autocomplete="name">
+          <label for="correo">Correo electrónico</label><input id="correo" name="correo" type="email" required maxlength="150" autocomplete="email">
+          <label for="interes">Departamento de interés</label><select id="interes" name="interes"><option value="">Aún estoy explorando</option></select>
+          <label for="mensaje">Consulta</label><textarea id="mensaje" name="mensaje" rows="3" maxlength="800"></textarea>
+          <button id="contact-submit" class="pill primary" type="submit">Descargar consulta <span aria-hidden="true">↓</span></button>
+          <p id="contact-status" role="status"></p>
+        </form>
+      </div>
+      <div class="footer-bottom"><a class="brand" href="#inicio"><span class="mark" aria-hidden="true"></span><span>TORRES <small>DEL MALL</small></span></a><small>Imágenes y tipologías referenciales.</small><a href="#inicio">Volver arriba ↑</a></div>
+    </div>
+  </footer>
+  <dialog id="project-dialog" aria-labelledby="dialog-title"><div class="dialog-content"><form method="dialog"><button type="submit" class="close" aria-label="Cerrar">×</button></form><img id="dialog-image" src="./assets/torre-a.jpg" alt=""><div class="dialog-text"><p class="eyebrow">TIPOLOGÍA REFERENCIAL</p><h2 id="dialog-title"></h2><p id="dialog-description"></p><button type="button" class="pill primary" id="dialog-contact">Preparar consulta <span aria-hidden="true">↗</span></button></div></div></dialog>
+</body>
+</html>
