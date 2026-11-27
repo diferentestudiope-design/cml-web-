@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ficha residencial | Constructora Moreno Linch</title>
+  <link rel="stylesheet" href="./styles.css?v=fichas-1">
+  <link rel="stylesheet" href="./proyecto.css?v=fichas-1">
+  <script src="./proyectos.js?v=fichas-1" defer></script>
+  <script src="./proyecto.js?v=fichas-1" defer></script>
+</head>
+<body class="project-page">
+  <header class="project-nav">
+    <a href="./index.html" aria-label="Inicio de Constructora Moreno Linch"><img src="./assets/cml-logo-blanco.png" width="1500" height="363" alt="Constructora Moreno Linch"></a>
+    <a href="./index.html#departamentos">← Departamentos</a>
+  </header>
+  <main id="ficha">
+    <section class="project-banner">
+      <img id="portada" src="./assets/interior.jpg" alt="">
+      <div class="wrap banner-text"><p>Torres del Mall</p><h1 id="nombre-proyecto">Ficha residencial</h1><p class="project-status" id="estado"></p></div>
+    </section>
+    <div class="wrap">
+      <dl class="project-facts" id="datos"></dl>
+      <p class="sample-note">Imágenes y datos de demostración. No constituyen una oferta.</p>
+    </div>
+
+    <section class="wrap project-section project-split" aria-labelledby="sobre-titulo">
+      <img class="project-building" id="fachada" src="./assets/torre-a.jpg" alt="Fachada referencial" loading="lazy">
+      <div>
+        <h2 id="sobre-titulo">Conoce el proyecto</h2>
+        <p id="descripcion"></p>
+        <ul class="project-amenities" aria-label="Áreas comunes de ejemplo"><li>Terraza</li><li>Zona de lectura</li><li>Estacionamiento de bicicletas</li><li>Patio interior</li></ul>
+        <p class="sample-note">Áreas comunes de ejemplo, sujetas a confirmación.</p>
+        <div class="project-actions">
+          <button type="button" class="pill project-outline" id="imprimir">Guardar ficha ↓</button>
+          <a class="pill project-primary" href="#galeria">Ver recorrido fotográfico →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section project-gallery" id="galeria" aria-labelledby="galeria-titulo">
+      <div class="wrap">
+        <h2 id="galeria-titulo">Galería</h2>
+        <div class="project-filters" role="group" aria-label="Tipo de imagen">
+          <button type="button" class="pill" data-gallery="interiores" aria-pressed="true">Interiores</button>
+          <button type="button" class="pill" data-gallery="exteriores" aria-pressed="false">Exteriores</button>
+        </div>
+        <figure class="gallery-stage">
+          <img id="galeria-imagen" src="./assets/interior.jpg" alt="">
+          <figcaption id="galeria-texto" aria-live="polite"></figcaption>
+          <button type="button" class="gallery-prev" aria-label="Imagen anterior">‹</button>
+          <button type="button" class="gallery-next" aria-label="Imagen siguiente">›</button>
+        </figure>
+        <div class="gallery-thumbs" id="miniaturas" role="group" aria-label="Elegir imagen"></div>
+      </div>
+    </section>
+
+    <section class="wrap project-section" id="cotizar" aria-labelledby="distribucion-titulo">
+      <h2 id="distribucion-titulo">Distribución y cotización</h2>
+      <div class="project-split">
+        <div>
+          <label for="tipo-plano">Selecciona el número de dormitorios</label>
+          <select id="tipo-plano"></select>
+          <figure class="project-plan">
+            <div id="plano" class="plan-rooms"></div>
+            <figcaption>Distribución ilustrativa, sin escala. Plano oficial pendiente.</figcaption>
+          </figure>
+        </div>
+        <form id="consulta-proyecto" class="project-form">
+          <h3>Cotiza ahora</h3>
+          <p>Descarga una consulta con tus datos y la distribución elegida.</p>
+          <label>Nombre <input name="nombre" autocomplete="given-name" required maxlength="100"></label>
+          <label>Apellido <input name="apellido" autocomplete="family-name" required maxlength="100"></label>
+          <label>Correo <input name="correo" type="email" autocomplete="email" required maxlength="150"></label>
+          <label>Celular <input name="celular" type="tel" autocomplete="tel" maxlength="32"></label>
+          <label class="full">Mensaje <textarea name="mensaje" rows="3" maxlength="800"></textarea></label>
+          <button class="pill project-primary full" type="submit">Descargar consulta ↓</button>
+          <p id="consulta-estado" class="full" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="wrap project-section" id="zona" aria-labelledby="zona-titulo">
+      <div class="zone-heading">
+        <div><h2 id="zona-titulo">Conoce la zona</h2><p id="direccion-zona"></p></div>
+        <div class="project-actions"><a class="pill project-outline" href="https://www.google.com/maps/search/?api=1&amp;query=Lima%2C%20Per%C3%BA">Google Maps · Lima ↗</a><a class="pill project-outline" href="https://www.waze.com/ul?q=Lima%2C%20Peru">Waze · Lima ↗</a></div>
+      </div>
+      <div class="zone-map" aria-label="Esquema ilustrativo de la zona"><span class="zone-pin">Torres del Mall</span><div id="zona-puntos"></div></div>
+      <div class="project-filters zone-filters" role="group" aria-label="Lugares de ejemplo" id="zona-filtros"></div>
+      <p class="sample-note">Mapa esquemático. La ubicación y las indicaciones exactas están pendientes.</p>
+    </section>
+
+    <section class="wrap project-section project-related" aria-labelledby="relacionados-titulo">
+      <h2 id="relacionados-titulo">También te puede interesar</h2>
+      <div class="cards" id="relacionados"></div>
+    </section>
+  </main>
+  <footer class="project-footer"><div class="wrap"><a href="./index.html#departamentos">← Volver a Departamentos</a></div></footer>
+</body>
+</html>

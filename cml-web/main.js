@@ -1,55 +1,14 @@
 const contactEmail = ""; // Correo comercial oficial, cuando esté disponible.
 
-const typologies = [
-  { id: "compacto", name: "Compacto", rooms: "1 dormitorio", image: "torre-a.jpg", status: "En construcción", location: "Av. Los Álamos 120", area: 38, price: "198,000", description: "Una distribución para quienes buscan independencia y un espacio fácil de organizar." },
-  { id: "flexible", name: "Flexible", rooms: "2 dormitorios", image: "torre-b.jpg", status: "En construcción", location: "Jr. Las Moreras 240", area: 57, price: "279,000", description: "Un segundo ambiente para compartir, trabajar desde casa o recibir visitas." },
-  { id: "familiar", name: "Familiar", rooms: "3 dormitorios", image: "torre-c.jpg", status: "Entrega inmediata", location: "Av. Los Jardines 360", area: 81, price: "379,000", description: "Ambientes diferenciados para combinar privacidad y momentos en familia." },
-];
-
-const dialog = document.querySelector("#project-dialog");
 const interest = document.querySelector("#interes");
 const catalog = document.querySelector("#typologies");
-let selectedTypology;
 
 for (const typology of typologies) {
-  const card = document.createElement("article");
-  card.className = "catalog-card";
+  const card = createProjectCard(typology);
   card.dataset.reveal = "";
-  card.innerHTML = `
-    <button class="card-button" type="button" aria-labelledby="card-title-${typology.id}" aria-describedby="card-data-${typology.id}" aria-haspopup="dialog">
-      <span class="card-image"><img src="./assets/${typology.image}" alt="" loading="lazy"><span class="card-overlay" aria-hidden="true">Ver detalles</span></span>
-      <span class="card-body">
-        <strong class="card-title" id="card-title-${typology.id}">${typology.name}</strong>
-        <span class="card-data" id="card-data-${typology.id}">
-          <span class="card-status">${typology.status}</span>
-          <span class="card-location">${typology.location}</span>
-          <span class="card-stats">
-            <span class="card-measures"><span>${typology.rooms}</span><span>Desde <b>${typology.area} m²</b></span></span>
-            <span class="card-price"><small>Desde</small><b>S/ ${typology.price}</b></span>
-          </span>
-          <small class="card-note">Datos ficticios · No constituyen una oferta</small>
-        </span>
-      </span>
-    </button>`;
-  card.querySelector("button").addEventListener("click", () => {
-    selectedTypology = typology;
-    document.querySelector("#dialog-title").textContent = typology.name;
-    document.querySelector("#dialog-description").textContent = typology.description;
-    document.querySelector("#dialog-image").src = "./assets/" + typology.image;
-    dialog.showModal();
-  });
   catalog.append(card);
   interest.add(new Option(typology.name + " · " + typology.rooms, typology.id));
 }
-
-document.querySelector("#dialog-contact").addEventListener("click", () => {
-  interest.value = selectedTypology.id;
-  dialog.close();
-  document.querySelector("#nombre").focus();
-});
-dialog.addEventListener("click", (event) => {
-  if (event.target === dialog) dialog.close();
-});
 
 const header = document.querySelector(".header");
 const hero = document.querySelector(".hero");
@@ -199,33 +158,3 @@ document.querySelector("#contact-form").addEventListener("submit", (event) => {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
   contactStatus.textContent = "Consulta preparada para descargar.";
 });
-
-const pointerPreference = matchMedia("(any-hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference)");
-const customPointer = document.createElement("div");
-customPointer.className = "cml-pointer";
-customPointer.setAttribute("aria-hidden", "true");
-customPointer.hidden = true;
-document.body.append(customPointer);
-
-function hideCustomPointer() {
-  document.documentElement.classList.remove("has-cml-pointer");
-  customPointer.hidden = true;
-}
-
-document.addEventListener("pointermove", (event) => {
-  if (!pointerPreference.matches || event.pointerType !== "mouse" ||
-      !(event.target instanceof Element) ||
-      event.target.closest("input, textarea, select, [contenteditable], dialog")) {
-    hideCustomPointer();
-    return;
-  }
-
-  customPointer.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-  customPointer.classList.toggle("is-action", Boolean(event.target.closest("a, button, summary")));
-  customPointer.hidden = false;
-  document.documentElement.classList.add("has-cml-pointer");
-});
-document.documentElement.addEventListener("pointerleave", hideCustomPointer);
-window.addEventListener("blur", hideCustomPointer);
-document.addEventListener("keydown", hideCustomPointer);
-pointerPreference.addEventListener("change", hideCustomPointer);

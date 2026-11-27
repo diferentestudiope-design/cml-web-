@@ -179,15 +179,6 @@ em { font-family: var(--serif); font-weight: 400; }
 #contact-status { min-height: 1.5em; }
 .footer-bottom { border-top: 1px solid #ffffff45; padding-top: 24px; margin-top: 55px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
 footer.section { padding-bottom: 35px; }
-dialog { width: min(92vw, 530px); max-height: 90dvh; padding: 0; border: 0; border-radius: 8px; background: var(--paper); color: var(--ink); }
-dialog::backdrop { background: #14282bd6; }
-.dialog-content { position: relative; }
-.dialog-content img { height: 215px; }
-.dialog-text { padding: 25px; }
-.dialog-text h2 { font-size: clamp(2.5rem, 6vw, 4.25rem); }
-.dialog-text .eyebrow { margin-bottom: 8px; }
-.dialog-text p:not(.eyebrow) { margin-block: 14px 20px; }
-.close { position: absolute; right: 12px; top: 12px; width: 43px; height: 43px; background: var(--paper); border: 0; border-radius: 50%; font-size: 1.5rem; }
 @media (max-width: 1024px) {
   :root { --header-height: 65px; }
   .header { display: flex; justify-content: space-between; padding-inline: 24px; gap: 8px; }
