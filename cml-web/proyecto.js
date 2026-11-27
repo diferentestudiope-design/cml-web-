@@ -1,3 +1,9 @@
+const factIcons = {
+  location: '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+  bed: '<path d="M4 13V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7M2 19v2m20-2v2M2 19v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5ZM6 12V9a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3m2 0V9a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3"/>',
+  area: '<path d="M7 3h12a2 2 0 0 1 2 2v12M3 7v12a2 2 0 0 0 2 2h12M1 7l2-3 2 3m12 12 3 2-3 2M6 15v-4a2 2 0 0 1 4 0v4m0-4a2 2 0 0 1 4 0v4m2-7a1.5 1.5 0 1 1 2.5 1L16 11h3"/>',
+};
+
 const projectId = new URLSearchParams(location.search).get("tipo");
 const project = typologies.find(({ id }) => id === projectId);
 
@@ -17,11 +23,11 @@ function renderProject(project) {
   select("#descripcion").textContent = project.description;
   select("#direccion-zona").textContent = project.location + " · Dirección ficticia";
   const facts = [
-    ["Ubicación", project.location, "⌖"],
-    ["Dormitorios", project.rooms, "▤"],
+    ["Ubicación", project.location, "location"],
+    ["Dormitorios", project.rooms, "bed"],
     ["Desde", project.area + " m²"],
     ["Hasta", project.maxArea + " m²"],
-    ["Precio desde", "S/ " + project.price, "S/"],
+    ["Precio desde", "S/ " + project.price, "area"],
   ];
   const factPanel = select("#datos");
   for (const [label, value, icon] of facts) {
@@ -32,7 +38,10 @@ function renderProject(project) {
     term.textContent = label;
     detail.textContent = value;
     fact.append(term, detail);
-    if (icon) fact.dataset.icon = icon;
+    if (icon) {
+      fact.classList.add("has-fact-icon");
+      term.insertAdjacentHTML("afterbegin", `<svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${factIcons[icon]}</svg>`);
+    }
     factPanel.append(fact);
   }
 
