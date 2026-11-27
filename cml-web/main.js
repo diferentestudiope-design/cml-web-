@@ -1,12 +1,19 @@
 const contactEmail = "torresdelmall@morenolinch.com";
 
 const interest = document.querySelector("#interes");
-const catalog = document.querySelector("#typologies");
+const catalog = document.querySelector("#project-catalog");
+const projectsMenu = document.querySelector(".projects-menu");
 
-for (const typology of typologies) {
-  const card = createProjectCard(typology);
+for (const project of currentProjects) {
+  const link = document.createElement("a");
+  link.href = project.href;
+  link.textContent = project.name;
+  projectsMenu.append(link);
+  const card = createProjectCard(project);
   card.dataset.reveal = "";
   catalog.append(card);
+}
+for (const typology of typologies) {
   interest.add(new Option(typology.name + " · " + typology.rooms, typology.id));
 }
 
@@ -30,9 +37,20 @@ menu.addEventListener("click", () => {
   menu.setAttribute("aria-expanded", String(menu.getAttribute("aria-expanded") === "false"));
 });
 nav.addEventListener("click", (event) => {
-  if (event.target.closest("a")) closeMenu();
+  if (event.target.closest("a")) {
+    projectsMenu.open = false;
+    closeMenu();
+  }
+});
+document.addEventListener("click", (event) => {
+  if (!projectsMenu.contains(event.target)) projectsMenu.open = false;
 });
 document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && projectsMenu.open) {
+    projectsMenu.open = false;
+    projectsMenu.querySelector("summary").focus();
+    return;
+  }
   if (event.key === "Escape" && menu.getAttribute("aria-expanded") === "true") {
     closeMenu();
     menu.focus();

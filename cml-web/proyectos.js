@@ -19,22 +19,31 @@ const typologies = [
   plan: "torres-del-mall/" + typology.id + ".jpg",
 }));
 
-function createProjectCard(typology) {
+const currentProjects = [
+  { id: "legend", name: "Legend Residencial", location: "Calle Colombia 114 · Urb. El Recreo", image: "proyectos-cml/legend.jpg", href: "https://www.morenolinch.com/residencial_legend.html", rooms: "1, 2 y 3 dormitorios", area: "51.64 a 153.59 m²" },
+  { id: "torres-del-mall", name: "Torres del Mall - Condominio", location: "Junto a Mallplaza Trujillo", image: "torres-del-mall/01.jpg", href: "./proyecto.html?tipo=x01", rooms: "3 dormitorios", area: "52.70 a 64.20 m²" },
+  { id: "mam290", name: "MAM 290 California", location: "Calle Juan Julio Ganoza 475 · Urb. California", image: "proyectos-cml/mam290.jpg", href: "https://www.morenolinch.com/mam290_home_and_office.html", rooms: "1, 2 y 3 dormitorios", area: "56.05 a 120.97 m²" },
+  { id: "infinity", name: "Infinity Apartments", location: "Av. Las Palmas con Calle Las Capullanas · Urb. El Golf", image: "proyectos-cml/infinity.jpg", href: "https://www.morenolinch.com/infinity_apartments.html" },
+];
+
+function createProjectCard(project) {
   const card = document.createElement("article");
   card.className = "catalog-card";
+  const measures = project.rooms
+    ? `<span class="card-measures"><span>${project.rooms}</span><b>${project.area}</b></span>`
+    : '<span class="card-measures">Consulta características</span>';
   card.innerHTML = `
-    <a class="card-button" href="./proyecto.html?tipo=${typology.id}" aria-labelledby="card-title-${typology.id}" aria-describedby="card-data-${typology.id}">
-      <span class="card-image"><img src="./assets/${typology.image}" alt="" loading="lazy"><span class="card-overlay" aria-hidden="true">Ver detalles</span></span>
+    <a class="card-button" href="${project.href}" aria-labelledby="card-title-${project.id}" aria-describedby="card-data-${project.id}">
+      <span class="card-image"><img src="./assets/${project.image}" alt="" loading="lazy"><span class="card-overlay" aria-hidden="true">Ver proyecto</span></span>
       <span class="card-body">
-        <strong class="card-title" id="card-title-${typology.id}">${typology.name}</strong>
-        <span class="card-data" id="card-data-${typology.id}">
-          <span class="card-status">Torre A</span>
-          <span class="card-location">Junto a Mallplaza Trujillo</span>
+        <strong class="card-title" id="card-title-${project.id}">${project.name}</strong>
+        <span class="card-data" id="card-data-${project.id}">
+          <span class="card-status">Proyecto actual</span>
+          <span class="card-location">${project.location}</span>
           <span class="card-stats">
-            <span class="card-measures"><span>${typology.rooms}</span><span><b>${typology.area} m²</b></span></span>
+            ${measures}
             <span class="card-price"><small>Precio</small><b>Consultar</b></span>
           </span>
-          <small class="card-note">Área referencial según brochure</small>
         </span>
       </span>
     </a>`;

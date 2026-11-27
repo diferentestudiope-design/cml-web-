@@ -83,7 +83,6 @@
 .project-form button { justify-self: center; }
 .zone-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px; }
 .zone-map { display: block; width: 100%; height: clamp(280px, 40vw, 480px); margin-top: 24px; border: 1px solid #103e6377; border-radius: 22px; }
-.project-related .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .project-footer { padding: 26px 0; background: #112c3b; color: white; }
 @media (max-width: 900px) {
   .project-overview { grid-template-columns: minmax(0, 1fr); width: min(calc(100% - 48px), 660px); gap: clamp(36px, 6vw, 56px); }

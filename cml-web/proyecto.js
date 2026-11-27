@@ -58,9 +58,8 @@ function renderProject(project) {
   for (const typology of typologies) {
     planSelect.add(new Option(typology.name + " · " + typology.area + " m²", typology.id));
   }
-  const projectIndex = typologies.indexOf(project);
-  for (const offset of [1, 2]) {
-    select("#relacionados").append(createProjectCard(typologies[(projectIndex + offset) % typologies.length]));
+  for (const related of currentProjects) {
+    if (related.id !== "torres-del-mall") select("#relacionados").append(createProjectCard(related));
   }
   planSelect.value = project.id;
 
