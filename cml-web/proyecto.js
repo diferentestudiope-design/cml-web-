@@ -38,7 +38,7 @@ function renderProject(project) {
     ["Dormitorios", project.rooms, "bed"],
     ["Área", project.area + " m²"],
     ["Baños", String(project.bathrooms)],
-    ["Precio", "Consultar", "area"],
+    ["Precio desde", torresDelMall.price, "area"],
   ];
   renderFacts(facts);
   const map = select("#mapa-proyecto");
@@ -153,7 +153,7 @@ function renderResidential(project) {
 
   const facts = [["Ubicación", project.location, "location"]];
   if (project.rooms) facts.push(["Dormitorios", project.rooms, "bed"], ["Área", project.area, "area"]);
-  if (project.status === "available") facts.push(["Precio", "Consultar"]);
+  if (project.price) facts.push(["Precio desde", project.price]);
   renderFacts(facts);
   select("#datos").classList.add("residential-facts");
 

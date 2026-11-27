@@ -1,6 +1,7 @@
 const torresDelMall = {
   location: "Av. Jesús de Nazareth con Av. América Oeste, Trujillo",
   rooms: "3 dormitorios",
+  price: "S/ 240,000",
 };
 
 const typologies = [
@@ -27,9 +28,9 @@ const projectStatuses = {
 const currentProjects = [
   { id: "iconic", name: "Iconic", status: "upcoming", image: "proyectos-cml/iconic-manta-cml.jpg", href: "./proyecto.html?proyecto=iconic" },
   { id: "live", name: "Live", status: "upcoming", image: "proyectos-cml/live-manta-cml.jpg", href: "./proyecto.html?proyecto=live" },
-  { id: "legend", status: "available", name: "Legend Residencial", location: "Calle Colombia 114 · Urb. El Recreo", image: "proyectos-cml/legend.jpg", href: "./proyecto.html?proyecto=legend", phone: "959 287 595", description: "Legend Residencial está en la urbanización El Recreo, en el centro de Trujillo. Ofrece departamentos de uno, dos y tres dormitorios. Entre las áreas comunes se incluyen coworking, gimnasio, un salón de usos múltiples, una terraza y zona de parrillas.", amenities: ["Lobby", "Coworking", "Coffee lounge", "Gimnasio", "Salón de usos múltiples", "Terraza", "Zona de parrillas"], rooms: "1, 2 y 3 dormitorios", area: "51.64 a 153.59 m²" },
-  { id: "torres-del-mall", status: "available", name: "Torres del Mall - Condominio", location: "Junto a Mallplaza Trujillo", image: "torres-del-mall/01.jpg", href: "./proyecto.html?tipo=x01", rooms: "3 dormitorios", area: "52.70 a 64.20 m²" },
-  { id: "mam290", status: "available", name: "MAM 290 California", location: "Calle Juan Julio Ganoza 475 · Urb. California", image: "proyectos-cml/mam290.jpg", href: "./proyecto.html?proyecto=mam290", phone: "943 412 626", description: "MAM 290 California reúne departamentos y oficinas en la urbanización California, cerca del Parque Grande. Los departamentos tienen uno, dos o tres dormitorios. El proyecto incluye espacios de trabajo, descanso y reunión.", amenities: ["Lobby", "Coworking", "Coffee lounge", "Zona de ocio", "Terraza", "Zona de parrillas"], rooms: "1, 2 y 3 dormitorios", area: "56.05 a 120.97 m²" },
+  { id: "legend", status: "available", price: "US$ 78,000", name: "Legend Residencial", location: "Calle Colombia 114 · Urb. El Recreo", image: "proyectos-cml/legend.jpg", href: "./proyecto.html?proyecto=legend", phone: "959 287 595", description: "Legend Residencial está en la urbanización El Recreo, en el centro de Trujillo. Ofrece departamentos de uno, dos y tres dormitorios. Entre las áreas comunes se incluyen coworking, gimnasio, un salón de usos múltiples, una terraza y zona de parrillas.", amenities: ["Lobby", "Coworking", "Coffee lounge", "Gimnasio", "Salón de usos múltiples", "Terraza", "Zona de parrillas"], rooms: "1, 2 y 3 dormitorios", area: "51.64 a 153.59 m²" },
+  { id: "torres-del-mall", status: "available", price: torresDelMall.price, name: "Torres del Mall - Condominio", location: "Junto a Mallplaza Trujillo", image: "torres-del-mall/01.jpg", href: "./proyecto.html?tipo=x01", rooms: "3 dormitorios", area: "52.70 a 64.20 m²" },
+  { id: "mam290", status: "available", price: "US$ 105,000", name: "MAM 290 California", location: "Calle Juan Julio Ganoza 475 · Urb. California", image: "proyectos-cml/mam290.jpg", href: "./proyecto.html?proyecto=mam290", phone: "943 412 626", description: "MAM 290 California reúne departamentos y oficinas en la urbanización California, cerca del Parque Grande. Los departamentos tienen uno, dos o tres dormitorios. El proyecto incluye espacios de trabajo, descanso y reunión.", amenities: ["Lobby", "Coworking", "Coffee lounge", "Zona de ocio", "Terraza", "Zona de parrillas"], rooms: "1, 2 y 3 dormitorios", area: "56.05 a 120.97 m²" },
   { id: "infinity", status: "sold", name: "Infinity Apartments", location: "Av. Las Palmas con Calle Las Capullanas · Urb. El Golf", image: "proyectos-cml/infinity.jpg", href: "./proyecto.html?proyecto=infinity", description: "Infinity Apartments está en la urbanización El Golf de Trujillo, en la esquina de la avenida Las Palmas con la calle Las Capullanas." },
 ];
 
@@ -51,7 +52,7 @@ function createProjectCard(project) {
           ${project.status === "available" ? `
             <span class="card-stats">
               ${measures}
-              <span class="card-price"><small>Precio</small><b>Consultar</b></span>
+              <span class="card-price"><small>Desde</small><b>${project.price}</b></span>
             </span>` : ""}
         </span>
       </span>
