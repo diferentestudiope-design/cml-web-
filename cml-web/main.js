@@ -9,7 +9,11 @@ for (const project of currentProjects) {
   link.href = project.href;
   link.textContent = project.name;
   projectsMenu.append(link);
-  if (catalog) {
+}
+
+if (catalog) {
+  const limit = Number(catalog.dataset.limit || currentProjects.length);
+  for (const project of currentProjects.slice(0, limit)) {
     const card = createProjectCard(project);
     card.dataset.reveal = "";
     catalog.append(card);
