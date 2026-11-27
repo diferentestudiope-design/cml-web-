@@ -34,7 +34,6 @@ customPointer.hidden = true;
 document.body.append(customPointer);
 
 function hideCustomPointer() {
-  document.documentElement.classList.remove("has-cml-pointer");
   customPointer.hidden = true;
 }
 
@@ -47,9 +46,7 @@ document.addEventListener("pointermove", (event) => {
   }
 
   customPointer.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-  customPointer.classList.toggle("is-action", Boolean(event.target.closest("a, button, summary")));
   customPointer.hidden = false;
-  document.documentElement.classList.add("has-cml-pointer");
 });
 document.documentElement.addEventListener("pointerleave", hideCustomPointer);
 window.addEventListener("blur", hideCustomPointer);
