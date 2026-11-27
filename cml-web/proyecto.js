@@ -15,7 +15,7 @@ if (residential) {
   if (residential.status === "upcoming") renderUpcoming(residential);
   else renderResidential(residential);
 } else if (!project) {
-  document.querySelector("#ficha").innerHTML = '<section class="wrap project-section"><h1>Ficha no encontrada</h1><a class="text-link" href="./index.html#departamentos">Ver proyectos →</a></section>';
+  document.querySelector("#ficha").innerHTML = '<section class="wrap project-section"><h1>Ficha no encontrada</h1><a class="text-link" href="./proyectos-actuales.html">Ver proyectos →</a></section>';
 } else {
   renderProject(project);
 }

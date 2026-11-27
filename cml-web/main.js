@@ -9,24 +9,30 @@ for (const project of currentProjects) {
   link.href = project.href;
   link.textContent = project.name;
   projectsMenu.append(link);
-  const card = createProjectCard(project);
-  card.dataset.reveal = "";
-  catalog.append(card);
+  if (catalog) {
+    const card = createProjectCard(project);
+    card.dataset.reveal = "";
+    catalog.append(card);
+  }
 }
-for (const typology of typologies) {
-  interest.add(new Option(typology.name + " · " + typology.rooms, typology.id));
+if (interest) {
+  for (const typology of typologies) {
+    interest.add(new Option(typology.name + " · " + typology.rooms, typology.id));
+  }
 }
 
 const header = document.querySelector(".header");
 const hero = document.querySelector(".hero");
 
-function updateHeader() {
-  header.classList.toggle("is-past-hero", hero.getBoundingClientRect().bottom <= header.offsetHeight);
-}
+if (hero) {
+  function updateHeader() {
+    header.classList.toggle("is-past-hero", hero.getBoundingClientRect().bottom <= header.offsetHeight);
+  }
 
-window.addEventListener("scroll", updateHeader, { passive: true });
-window.addEventListener("resize", updateHeader);
-updateHeader();
+  window.addEventListener("scroll", updateHeader, { passive: true });
+  window.addEventListener("resize", updateHeader);
+  updateHeader();
+}
 
 const menu = document.querySelector(".menu");
 const nav = document.querySelector("#navegacion");
@@ -60,73 +66,75 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-const slideButtons = [...document.querySelectorAll(".slide-controls button[aria-pressed]")];
-const slides = [...document.querySelectorAll(".hero-image")];
-const heroTitle = document.querySelector("#hero-title");
-const heroTitleLead = heroTitle.querySelector("span");
-const heroTitleEnding = heroTitle.querySelector("em");
-const heroDescription = document.querySelector(".hero-actions p");
-const playback = document.querySelector(".slide-playback");
-const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
-let currentSlide = 0;
-let slideTimer;
-let playing = false;
-let hovered = false;
+if (hero) {
+  const slideButtons = [...document.querySelectorAll(".slide-controls button[aria-pressed]")];
+  const slides = [...document.querySelectorAll(".hero-image")];
+  const heroTitle = document.querySelector("#hero-title");
+  const heroTitleLead = heroTitle.querySelector("span");
+  const heroTitleEnding = heroTitle.querySelector("em");
+  const heroDescription = document.querySelector(".hero-actions p");
+  const playback = document.querySelector(".slide-playback");
+  const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+  let currentSlide = 0;
+  let slideTimer;
+  let playing = false;
+  let hovered = false;
 
-function showSlide(index) {
-  if (index === currentSlide) return;
-  currentSlide = index;
-  const { title, ending, description } = slides[index].dataset;
-  heroTitleLead.textContent = title;
-  heroTitleEnding.textContent = ending;
-  heroDescription.textContent = description;
-  if (!motionPreference.matches) {
-    for (const element of [heroTitle, heroDescription]) {
-      element.animate([{ opacity: .25, translate: "0 10px" }, { opacity: 1, translate: "0 0" }], {
-        duration: 650,
-        easing: "ease-out",
-      });
+  function showSlide(index) {
+    if (index === currentSlide) return;
+    currentSlide = index;
+    const { title, ending, description } = slides[index].dataset;
+    heroTitleLead.textContent = title;
+    heroTitleEnding.textContent = ending;
+    heroDescription.textContent = description;
+    if (!motionPreference.matches) {
+      for (const element of [heroTitle, heroDescription]) {
+        element.animate([{ opacity: .25, translate: "0 10px" }, { opacity: 1, translate: "0 0" }], {
+          duration: 650,
+          easing: "ease-out",
+        });
+      }
+    }
+    slides.forEach((slide, slideIndex) => slide.classList.toggle("active", slideIndex === index));
+    slideButtons.forEach((control, controlIndex) => control.setAttribute("aria-pressed", String(controlIndex === index)));
+  }
+
+  function syncSlideTimer() {
+    clearInterval(slideTimer);
+    if (playing && !hovered) {
+      slideTimer = setInterval(() => showSlide((currentSlide + 1) % slides.length), 6000);
     }
   }
-  slides.forEach((slide, slideIndex) => slide.classList.toggle("active", slideIndex === index));
-  slideButtons.forEach((control, controlIndex) => control.setAttribute("aria-pressed", String(controlIndex === index)));
-}
 
-function syncSlideTimer() {
-  clearInterval(slideTimer);
-  if (playing && !hovered) {
-    slideTimer = setInterval(() => showSlide((currentSlide + 1) % slides.length), 6000);
-  }
-}
-
-function setPlayback(enabled) {
-  playing = enabled;
-  syncSlideTimer();
-  playback.textContent = playing ? "Ⅱ" : "▶";
-  playback.setAttribute("aria-label", playing ? "Pausar carrusel" : "Reproducir carrusel");
-}
-
-function syncMotionPreference() {
-  playback.hidden = motionPreference.matches;
-  setPlayback(!motionPreference.matches);
-}
-
-slideButtons.forEach((button, index) => {
-  button.addEventListener("click", () => {
-    setPlayback(false);
-    showSlide(index);
-  });
-});
-playback.addEventListener("click", () => setPlayback(!playing));
-for (const eventName of ["pointerenter", "pointerleave"]) {
-  hero.addEventListener(eventName, (event) => {
-    if (event.pointerType !== "mouse") return;
-    hovered = eventName === "pointerenter";
+  function setPlayback(enabled) {
+    playing = enabled;
     syncSlideTimer();
+    playback.textContent = playing ? "Ⅱ" : "▶";
+    playback.setAttribute("aria-label", playing ? "Pausar carrusel" : "Reproducir carrusel");
+  }
+
+  function syncMotionPreference() {
+    playback.hidden = motionPreference.matches;
+    setPlayback(!motionPreference.matches);
+  }
+
+  slideButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      setPlayback(false);
+      showSlide(index);
+    });
   });
+  playback.addEventListener("click", () => setPlayback(!playing));
+  for (const eventName of ["pointerenter", "pointerleave"]) {
+    hero.addEventListener(eventName, (event) => {
+      if (event.pointerType !== "mouse") return;
+      hovered = eventName === "pointerenter";
+      syncSlideTimer();
+    });
+  }
+  motionPreference.addEventListener("change", syncMotionPreference);
+  syncMotionPreference();
 }
-motionPreference.addEventListener("change", syncMotionPreference);
-syncMotionPreference();
 
 if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const observer = new IntersectionObserver((entries) => {
@@ -143,11 +151,11 @@ if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: re
 }
 
 const contactStatus = document.querySelector("#contact-status");
-if (contactEmail) {
+if (contactStatus && contactEmail) {
   document.querySelector("#contact-mode").textContent = "Abre tu aplicación de correo para revisar y enviar la consulta.";
   document.querySelector("#contact-submit").textContent = "Abrir correo ↗";
 }
-document.querySelector("#contact-form").addEventListener("submit", (event) => {
+document.querySelector("#contact-form")?.addEventListener("submit", (event) => {
   event.preventDefault();
   const fields = new FormData(event.currentTarget);
   const name = fields.get("nombre").trim();

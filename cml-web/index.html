@@ -7,25 +7,25 @@
   <meta name="theme-color" content="#151518">
   <title>Torres del Mall | Tu casa, tu ciudad</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@300;400;600;700;800&family=Manrope:wght@600&display=swap">
-  <link rel="stylesheet" href="./styles.css?v=menu-cml-1">
+  <link rel="stylesheet" href="./styles.css?v=paginas-cml-1">
   <script src="./proyectos.js?v=tarjetas-alineadas" defer></script>
-  <script src="./main.js?v=menu-cml-1" defer></script>
+  <script src="./main.js?v=paginas-cml-1" defer></script>
 </head>
 <body>
   <a href="#contenido" class="skip">Saltar al contenido</a>
   <header class="header">
-    <a class="brand" href="#inicio" aria-label="Constructora Moreno Linch, inicio"><img class="brand-logo" src="./assets/cml-logo-blanco.png" width="1500" height="363" alt="Constructora Moreno Linch"></a>
+    <a class="brand" href="./index.html" aria-label="Constructora Moreno Linch, inicio"><img class="brand-logo" src="./assets/cml-logo-blanco.png" width="1500" height="363" alt="Constructora Moreno Linch"></a>
     <button class="menu" type="button" aria-label="Menú" aria-expanded="false" aria-controls="navegacion">☰</button>
     <nav id="navegacion" aria-label="Principal">
-      <a href="#inicio">Inicio</a>
-      <a href="#equipo">Nosotros</a>
-      <details class="projects-menu" id="menu-actuales"><summary>Proyectos actuales</summary><a href="#departamentos">Ver todos los proyectos</a></details>
+      <a href="./index.html" aria-current="page">Inicio</a>
+      <a href="./nosotros.html">Nosotros</a>
+      <details class="projects-menu" id="menu-actuales"><summary><a href="./proyectos-actuales.html">Proyectos actuales</a></summary><a href="./proyectos-actuales.html">Ver todos los proyectos</a></details>
       <details class="projects-menu">
-        <summary>Proyectos entregados</summary>
-        <a href="#entregados">Ver obras entregadas</a>
-        <a href="#edificacion-entregada">Edificación</a>
-        <a href="#comerciales-entregados">Obras comerciales</a>
-        <a href="#publicas-entregadas">Obras públicas</a>
+        <summary><a href="./proyectos-entregados.html">Proyectos entregados</a></summary>
+        <a href="./proyectos-entregados.html">Ver obras entregadas</a>
+        <a href="./proyectos-entregados.html#edificacion-entregada">Edificación</a>
+        <a href="./proyectos-entregados.html#comerciales-entregados">Obras comerciales</a>
+        <a href="./proyectos-entregados.html#publicas-entregadas">Obras públicas</a>
       </details>
     </nav>
     <a class="header-contact" href="#contacto">
@@ -45,7 +45,7 @@
       <div class="wrap hero-content">
         <h1 id="hero-title"><span>Vive cerca.</span><span><em>A tu ritmo.</em></span></h1>
         <div class="hero-actions">
-          <a class="pill primary" href="#departamentos">Ver proyectos actuales <span aria-hidden="true">↘</span></a>
+          <a class="pill primary" href="./proyectos-actuales.html">Ver proyectos actuales <span aria-hidden="true">↘</span></a>
           <p>Departamentos para vivir la ciudad a tu ritmo.</p>
         </div>
       </div>
@@ -90,21 +90,6 @@
       </div>
     </section>
 
-    <section id="departamentos" class="catalog section">
-      <div class="wrap">
-        <div class="section-heading" data-reveal><div><p class="eyebrow">PROYECTOS ACTUALES</p><h2>Encuentra tu <em>espacio.</em></h2></div><p>Conoce los proyectos de Constructora Moreno Linch en Trujillo.</p></div>
-        <div class="cards" id="project-catalog"></div>
-      </div>
-    </section>
-
-    <section class="statement section" aria-labelledby="vision-title">
-      <div class="wrap statement-grid">
-        <img class="statement-first" src="./assets/interior.jpg" alt="" loading="lazy" data-reveal>
-        <div data-reveal><p class="eyebrow">NUESTRA VISIÓN</p><h2 id="vision-title">Innovación, calidad <em>y seguridad.</em></h2></div>
-        <img class="statement-last" src="./assets/torre-b.jpg" alt="" loading="lazy" data-reveal>
-      </div>
-    </section>
-
     <section id="experiencia" class="dark section">
       <div class="wrap">
         <div class="section-heading" data-reveal><div><p class="eyebrow">LA EXPERIENCIA</p><h2>Bien pensado,<br><em>bien vivido.</em></h2></div><a class="pill outline" href="#contacto">Consulta el proyecto <span aria-hidden="true">↗</span></a></div>
@@ -132,23 +117,6 @@
       </div>
     </section>
 
-    <section id="equipo" class="wrap section">
-      <div class="section-heading" data-reveal><div><p class="eyebrow">NOSOTROS</p><h2>Constructora <em>Moreno Linch.</em></h2></div><p>Constructora Moreno Linch S.A.C. nació en Trujillo en 2003 y ha ejecutado 44 obras inmobiliarias, comerciales y públicas.</p></div>
-      <div class="team" data-reveal>
-        <figure class="photo"><img src="./assets/equipo.jpg" alt="Imagen referencial de profesionales de arquitectura colaborando" loading="lazy"></figure>
-        <div class="team-roles"><article><h3>Edificación residencial</h3><p>Diseño y construcción de edificios multifamiliares y viviendas.</p></article><article><h3>Obras comerciales y públicas</h3><p>Experiencia en proyectos para empresas e instituciones.</p></article><article><h3>Atención y posventa</h3><p>Acompañamiento durante la compra y después de la entrega.</p></article></div>
-      </div>
-    </section>
-    <section id="entregados" class="section delivered" aria-labelledby="entregados-titulo">
-      <div class="wrap">
-        <div class="section-heading"><h2 id="entregados-titulo">Proyectos <em>entregados.</em></h2><p>Una selección de obras ejecutadas por Constructora Moreno Linch.</p></div>
-        <div class="cards delivered-list">
-          <article id="edificacion-entregada"><h3>Edificación</h3><ul><li>Condominio Bicentenario</li><li>Residencial Comp 475</li><li>Torre Varcárcel</li><li>Las Terrazas del Golf</li></ul></article>
-          <article id="comerciales-entregados"><h3>Obras comerciales</h3><ul><li>Mall Aventura Plaza</li><li>Wong Av. Larco</li><li>Wong California</li><li>Cinemark</li></ul></article>
-          <article id="publicas-entregadas"><h3>Obras públicas</h3><ul><li>Gran Biblioteca Pública</li><li>Paseo Peatonal Pizarro</li><li>Complejo Termal de la Juventud</li><li>Fiscalía de Chepén</li></ul></article>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer id="contacto" class="section">
@@ -165,7 +133,7 @@
           <p id="contact-status" role="status"></p>
         </form>
       </div>
-      <div class="footer-bottom"><a class="brand" href="#inicio"><img class="brand-logo" src="./assets/cml-logo-blanco.png" width="1500" height="363" alt="Constructora Moreno Linch"></a><small>Imágenes y tipologías referenciales.</small><a href="#inicio">Volver arriba ↑</a></div>
+      <div class="footer-bottom"><a class="brand" href="./index.html"><img class="brand-logo" src="./assets/cml-logo-blanco.png" width="1500" height="363" alt="Constructora Moreno Linch"></a><small>Imágenes y tipologías referenciales.</small><a href="#contenido">Volver arriba ↑</a></div>
     </div>
   </footer>
 </body>
