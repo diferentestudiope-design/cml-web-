@@ -1,7 +1,7 @@
 const typologies = [
-  { id: "compacto", name: "Compacto", rooms: "1 dormitorio", image: "torre-a.jpg", status: "En construcción", location: "Av. Los Álamos 120", area: 38, price: "198,000", description: "Una distribución para quienes buscan independencia y un espacio fácil de organizar." },
-  { id: "flexible", name: "Flexible", rooms: "2 dormitorios", image: "torre-b.jpg", status: "En construcción", location: "Jr. Las Moreras 240", area: 57, price: "279,000", description: "Un segundo ambiente para compartir, trabajar desde casa o recibir visitas." },
-  { id: "familiar", name: "Familiar", rooms: "3 dormitorios", image: "torre-c.jpg", status: "Entrega inmediata", location: "Av. Los Jardines 360", area: 81, price: "379,000", description: "Ambientes diferenciados para combinar privacidad y momentos en familia." },
+  { id: "compacto", name: "Compacto", rooms: "1 dormitorio", image: "torre-a.jpg", status: "En construcción", location: "Av. Los Álamos 120", area: 38, maxArea: 46, price: "198,000", description: "Una distribución para quienes buscan independencia y un espacio fácil de organizar." },
+  { id: "flexible", name: "Flexible", rooms: "2 dormitorios", image: "torre-b.jpg", status: "En construcción", location: "Jr. Las Moreras 240", area: 57, maxArea: 68, price: "279,000", description: "Un segundo ambiente para compartir, trabajar desde casa o recibir visitas." },
+  { id: "familiar", name: "Familiar", rooms: "3 dormitorios", image: "torre-c.jpg", status: "Entrega inmediata", location: "Av. Los Jardines 360", area: 81, maxArea: 96, price: "379,000", description: "Ambientes diferenciados para combinar privacidad y momentos en familia." },
 ];
 
 function createProjectCard(typology) {

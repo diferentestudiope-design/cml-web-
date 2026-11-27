@@ -17,19 +17,23 @@ function renderProject(project) {
   select("#descripcion").textContent = project.description;
   select("#direccion-zona").textContent = project.location + " · Dirección ficticia";
   const facts = [
-    ["Ubicación referencial", project.location],
-    ["Dormitorios", project.rooms],
-    ["Área desde", project.area + " m²"],
-    ["Precio desde", "S/ " + project.price],
+    ["Ubicación", project.location, "⌖"],
+    ["Dormitorios", project.rooms, "▤"],
+    ["Desde", project.area + " m²"],
+    ["Hasta", project.maxArea + " m²"],
+    ["Precio desde", "S/ " + project.price, "S/"],
   ];
-  for (const [label, value] of facts) {
+  const factPanel = select("#datos");
+  for (const [label, value, icon] of facts) {
     const fact = document.createElement("div");
+    fact.className = "project-fact";
     const term = document.createElement("dt");
     const detail = document.createElement("dd");
     term.textContent = label;
     detail.textContent = value;
     fact.append(term, detail);
-    select("#datos").append(fact);
+    if (icon) fact.dataset.icon = icon;
+    factPanel.append(fact);
   }
 
   select("#imprimir").addEventListener("click", () => window.print());
