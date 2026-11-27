@@ -42,13 +42,13 @@ function createProjectCard(project) {
     ? `<span class="card-measures"><span>${project.rooms}</span><b>${project.area}</b></span>`
     : '<span class="card-measures">Consulta características</span>';
   card.innerHTML = `
-    <a class="card-button" data-status="${project.status}" href="${project.href}" aria-labelledby="card-title-${project.id}" aria-describedby="card-data-${project.id}">
+    <a class="card-button" data-status="${project.status}" href="${project.href}" aria-labelledby="card-title-${project.id}" aria-describedby="card-status-${project.id} card-data-${project.id}">
       <span class="card-image"><img src="./assets/${project.image}" alt="${upcoming ? "Edificio cubierto con una manta de Constructora Moreno Linch" : ""}" loading="lazy">${upcoming ? "" : '<span class="card-overlay" aria-hidden="true">Ver proyecto</span>'}</span>
       <span class="card-body">
+        <span class="card-status" id="card-status-${project.id}">${projectStatuses[project.status]}</span>
         <strong class="card-title" id="card-title-${project.id}">${project.name}</strong>
         <span class="card-data" id="card-data-${project.id}">
-          <span class="card-status">${projectStatuses[project.status]}</span>
-          ${project.location ? `<span class="card-location">${project.location}</span>` : ""}
+          <span class="card-location">${project.location || ""}</span>
           ${project.status === "available" ? `
             <span class="card-stats">
               ${measures}
