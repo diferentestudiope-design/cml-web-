@@ -59,17 +59,24 @@ function renderProject(project) {
   const planDialog = select("#dialogo-plano");
   for (const typology of typologies) {
     planSelect.add(new Option(typology.name + " · " + typology.area + " m²", typology.id));
+  }
+  for (const rooms of new Set(typologies.map(({ rooms }) => rooms))) {
     const shortcut = document.createElement("button");
     shortcut.type = "button";
-    shortcut.value = typology.id;
-    shortcut.textContent = Number.parseInt(typology.rooms, 10);
-    shortcut.setAttribute("aria-label", typology.rooms);
+    shortcut.value = rooms;
+    shortcut.textContent = Number.parseInt(rooms, 10);
+    shortcut.setAttribute("aria-label", rooms);
     shortcut.addEventListener("click", () => {
-      planSelect.value = typology.id;
+      if (shortcut.getAttribute("aria-pressed") === "true") return;
+      const match = project.rooms === rooms ? project : typologies.find((typology) => typology.rooms === rooms);
+      planSelect.value = match.id;
       renderPlan();
     });
     planOptions.append(shortcut);
-    if (typology.id !== project.id) select("#relacionados").append(createProjectCard(typology));
+  }
+  const projectIndex = typologies.indexOf(project);
+  for (const offset of [1, 2]) {
+    select("#relacionados").append(createProjectCard(typologies[(projectIndex + offset) % typologies.length]));
   }
   planSelect.value = project.id;
 
@@ -81,7 +88,7 @@ function renderProject(project) {
     select("#plano-banos").textContent = bathrooms === 1 ? "1 baño" : "2 baños";
     select("#plano-area").textContent = typology.area + " m²";
     for (const shortcut of planOptions.children) {
-      shortcut.setAttribute("aria-pressed", String(shortcut.value === typology.id));
+      shortcut.setAttribute("aria-pressed", String(shortcut.value === typology.rooms));
     }
   }
 
@@ -125,7 +132,7 @@ function setupProjectGallery(project) {
       ["interior.jpg", "Detalle de la sala", "85% 70%"],
       ["interior.jpg", "Detalle del ventanal", "65% 35%"],
     ],
-    exteriores: [[project.image, "Fachada"], ["terraza.jpg", "Terraza"], ["hero.jpg", "Conjunto residencial"]],
+    exteriores: [[project.image, "Fachada"], ["terraza.jpg", "Terraza"], [project.image === "hero.jpg" ? "torre-c.jpg" : "hero.jpg", "Conjunto residencial"]],
   };
   const filters = [...document.querySelectorAll("[data-gallery]")];
   const thumbs = document.querySelector("#miniaturas");
