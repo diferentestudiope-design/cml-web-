@@ -42,6 +42,43 @@ const menu = document.querySelector(".menu");
 const nav = document.querySelector("#navegacion");
 const projectMenus = [...nav.querySelectorAll(".projects-menu")];
 
+const deliveredMenu = document.querySelector("#menu-entregados");
+
+async function loadDeliveredMenu() {
+  if (!deliveredMenu.open || deliveredMenu.querySelector(".delivered-menu-group")) return;
+  try {
+    let catalogPage = document;
+    if (!document.querySelector(".delivered-category")) {
+      const response = await fetch("./proyectos-entregados.html");
+      if (!response.ok) return;
+      catalogPage = new DOMParser().parseFromString(await response.text(), "text/html");
+    }
+
+    for (const categoryLink of deliveredMenu.querySelectorAll(":scope > a[href*='#']")) {
+      const category = catalogPage.getElementById(categoryLink.hash.slice(1));
+      if (!category) continue;
+      const group = document.createElement("details");
+      group.className = "delivered-menu-group";
+      group.name = "delivered-menu-category";
+      const summary = document.createElement("summary");
+      summary.textContent = categoryLink.textContent;
+      const links = document.createElement("div");
+      links.className = "delivered-menu-links";
+      for (const project of category.querySelectorAll(".delivered-list article")) {
+        const link = document.createElement("a");
+        link.href = "./proyectos-entregados.html#" + project.id;
+        link.textContent = project.querySelector("h3").textContent;
+        links.append(link);
+      }
+      group.append(summary, links);
+      categoryLink.replaceWith(group);
+    }
+  } catch {
+    // The category links still work when the catalog cannot be fetched.
+  }
+}
+deliveredMenu.addEventListener("toggle", loadDeliveredMenu);
+
 function closeMenu() {
   menu.setAttribute("aria-expanded", "false");
   for (const dropdown of projectMenus) dropdown.open = false;
@@ -60,7 +97,8 @@ document.addEventListener("click", (event) => {
 });
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape") return;
-  const openDropdown = projectMenus.find((dropdown) => dropdown.open);
+  const openCategory = deliveredMenu.open && deliveredMenu.querySelector(".delivered-menu-group[open]");
+  const openDropdown = openCategory || projectMenus.find((dropdown) => dropdown.open);
   if (openDropdown) {
     openDropdown.open = false;
     openDropdown.querySelector("summary").focus();
