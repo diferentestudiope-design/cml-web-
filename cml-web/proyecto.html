@@ -6,9 +6,9 @@
   <title>Ficha residencial | Constructora Moreno Linch</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap">
   <link rel="stylesheet" href="./styles.css?v=tarjetas-3">
-  <link rel="stylesheet" href="./proyecto.css?v=galeria-1">
+  <link rel="stylesheet" href="./proyecto.css?v=plano-1">
   <script src="./proyectos.js?v=resumen-1" defer></script>
-  <script src="./proyecto.js?v=galeria-1" defer></script>
+  <script src="./proyecto.js?v=plano-1" defer></script>
 </head>
 <body class="project-page">
   <header class="project-nav">
@@ -71,28 +71,40 @@
     </section>
 
     <section class="wrap project-section" id="cotizar" aria-labelledby="distribucion-titulo">
-      <h2 id="distribucion-titulo">Distribución y cotización</h2>
-      <div class="project-split">
-        <div>
-          <label for="tipo-plano">Selecciona el número de dormitorios</label>
-          <select id="tipo-plano"></select>
-          <figure class="project-plan">
+      <div class="plan-heading">
+        <h2 id="distribucion-titulo">Selecciona el número de <strong>dormitorios</strong></h2>
+        <div class="plan-options" id="plan-opciones" role="group" aria-label="Número de dormitorios"></div>
+      </div>
+      <div class="project-split quote-layout">
+        <figure class="project-plan">
+          <div class="plan-display">
             <div id="plano" class="plan-rooms"></div>
-            <figcaption>Distribución ilustrativa, sin escala. Plano oficial pendiente.</figcaption>
-          </figure>
-        </div>
+            <button id="ampliar-plano" class="plan-zoom" type="button" aria-label="Ampliar plano" aria-haspopup="dialog">⊕</button>
+          </div>
+          <figcaption>
+            <div class="plan-specs"><span id="plano-dormitorios"></span><span id="plano-banos"></span></div>
+            <strong id="plano-area"></strong>
+            <p class="sample-note">Distribución y medidas ilustrativas. Plano oficial pendiente.</p>
+          </figcaption>
+        </figure>
         <form id="consulta-proyecto" class="project-form">
           <h3>Cotiza ahora</h3>
           <p>Descarga una consulta con tus datos y la distribución elegida.</p>
-          <label>Nombre <input name="nombre" autocomplete="given-name" required maxlength="100"></label>
-          <label>Apellido <input name="apellido" autocomplete="family-name" required maxlength="100"></label>
-          <label>Correo <input name="correo" type="email" autocomplete="email" required maxlength="150"></label>
-          <label>Celular <input name="celular" type="tel" autocomplete="tel" maxlength="32"></label>
-          <label class="full">Mensaje <textarea name="mensaje" rows="3" maxlength="800"></textarea></label>
+          <label class="full">Tipología <select id="tipo-plano"></select></label>
+          <label>Nombre <input name="nombre" autocomplete="given-name" placeholder="Nombre" required maxlength="100"></label>
+          <label>Apellido <input name="apellido" autocomplete="family-name" placeholder="Apellido" required maxlength="100"></label>
+          <label>Correo <input name="correo" type="email" autocomplete="email" placeholder="Correo electrónico" required maxlength="150"></label>
+          <label>Celular <input name="celular" type="tel" autocomplete="tel" placeholder="Celular" maxlength="32"></label>
+          <label class="full">Mensaje <textarea name="mensaje" rows="3" placeholder="Cuéntanos qué te gustaría saber" maxlength="800"></textarea></label>
           <button class="pill project-primary full" type="submit">Descargar consulta ↓</button>
           <p id="consulta-estado" class="full" role="status"></p>
         </form>
       </div>
+      <dialog class="plan-dialog" id="dialogo-plano" aria-labelledby="titulo-plano-ampliado">
+        <div class="plan-dialog-heading"><h3 id="titulo-plano-ampliado">Plano ilustrativo</h3><form method="dialog"><button class="pill project-outline" aria-label="Cerrar plano">Cerrar ×</button></form></div>
+        <div id="plano-ampliado"></div>
+        <p class="sample-note">Distribución ilustrativa, sin escala.</p>
+      </dialog>
     </section>
 
     <section class="wrap project-section" id="zona" aria-labelledby="zona-titulo">

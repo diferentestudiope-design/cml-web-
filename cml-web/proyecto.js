@@ -54,8 +54,21 @@ function renderProject(project) {
   setupProjectGallery(project);
 
   const planSelect = select("#tipo-plano");
+  const planOptions = select("#plan-opciones");
+  const plan = select("#plano");
+  const planDialog = select("#dialogo-plano");
   for (const typology of typologies) {
-    planSelect.add(new Option(typology.rooms + " · " + typology.area + " m²", typology.id));
+    planSelect.add(new Option(typology.name + " · " + typology.area + " m²", typology.id));
+    const shortcut = document.createElement("button");
+    shortcut.type = "button";
+    shortcut.value = typology.id;
+    shortcut.textContent = Number.parseInt(typology.rooms, 10);
+    shortcut.setAttribute("aria-label", typology.rooms);
+    shortcut.addEventListener("click", () => {
+      planSelect.value = typology.id;
+      renderPlan();
+    });
+    planOptions.append(shortcut);
     if (typology.id !== project.id) select("#relacionados").append(createProjectCard(typology));
   }
   planSelect.value = project.id;
@@ -63,15 +76,34 @@ function renderProject(project) {
   function renderPlan() {
     const typology = typologies.find(({ id }) => id === planSelect.value);
     const bedrooms = Number.parseInt(typology.rooms, 10);
-    const rooms = ["Sala comedor", "Cocina", "Baño", ...Array.from({ length: bedrooms }, (_, index) => "Dormitorio " + (index + 1))];
-    const plan = select("#plano");
-    plan.replaceChildren(...rooms.map((name) => {
+    const bathrooms = bedrooms === 3 ? 2 : 1;
+    const rooms = [
+      ["living", "Sala comedor"], ["kitchen", "Cocina"], ["bath", "Baño"],
+      ...Array.from({ length: bedrooms }, (_, index) => ["bed", "Dormitorio " + (index + 1)]),
+    ];
+    if (bathrooms === 2) rooms.push(["bath", "Baño 2"]);
+    plan.replaceChildren(...rooms.map(([type, name]) => {
       const room = document.createElement("span");
-      room.textContent = name;
+      room.className = "plan-room plan-room-" + type;
+      const label = document.createElement("span");
+      label.textContent = name;
+      room.append(label);
       return room;
     }));
+    select("#plano-dormitorios").textContent = typology.rooms;
+    select("#plano-banos").textContent = bathrooms === 1 ? "1 baño" : "2 baños";
+    select("#plano-area").textContent = typology.area + " m²";
+    for (const shortcut of planOptions.children) {
+      shortcut.setAttribute("aria-pressed", String(shortcut.value === typology.id));
+    }
   }
 
+  select("#ampliar-plano").addEventListener("click", () => {
+    const enlarged = plan.cloneNode(true);
+    enlarged.removeAttribute("id");
+    select("#plano-ampliado").replaceChildren(enlarged);
+    planDialog.showModal();
+  });
   planSelect.addEventListener("change", renderPlan);
   renderPlan();
   select("#consulta-proyecto").addEventListener("submit", (event) => {

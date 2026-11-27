@@ -56,15 +56,43 @@
 .gallery-thumbs { position: relative; display: flex; justify-content: center; flex-wrap: wrap; gap: clamp(8px, 1.35vw, 22px); margin: clamp(-24px, -1.5vw, -12px) 0 0; }
 .gallery-thumbs button { overflow: hidden; width: clamp(60px, 8vw, 120px); aspect-ratio: 1.78; padding: 0; border: 2px solid white; border-radius: 8px; background: white; }
 .gallery-thumbs button[aria-pressed=true] { border-color: var(--hero-accent); }
-#tipo-plano, .project-form input, .project-form textarea { display: block; width: 100%; padding: 10px 14px; border: 1px solid #103e6377; border-radius: 14px; background: white; color: var(--ink); }
-.project-plan { margin-top: 18px; }
-.plan-rooms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; border: 4px solid var(--project-blue); padding: 6px; background: var(--project-blue); }
-.plan-rooms span { min-height: 64px; display: grid; place-items: center; text-align: center; padding: 8px; background: #f3e7d5; }
-.plan-rooms span:first-child { grid-column: 1 / -1; min-height: 90px; background: #f9f2e8; }
-.project-plan figcaption { margin-top: 8px; color: var(--muted); }
-.project-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: clamp(16px, 3vw, 32px); border-radius: 20px; background: #f7f3ec; }
+#cotizar { font-family: Manrope, Inter, var(--sans); }
+.plan-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; margin-bottom: clamp(28px, 5vw, 58px); }
+.plan-heading h2 { margin: 0; color: var(--ink); font-weight: 400; }
+.plan-heading strong { color: var(--project-blue); }
+.plan-options { display: flex; gap: 8px; }
+.plan-options button, .plan-zoom { width: 44px; height: 44px; border-radius: 50%; border: 1px solid #103e6355; background: #fff; color: var(--project-blue); font-weight: 700; }
+.plan-options button[aria-pressed=true] { background: var(--project-blue); color: white; }
+.quote-layout { grid-template-columns: minmax(0, 1.13fr) minmax(0, 1fr); }
+.project-plan { border: 1px solid #103e631e; padding: clamp(12px, 2vw, 24px); border-radius: 24px; box-shadow: 0 10px 32px #103e630d; }
+.plan-display { position: relative; background: #f3f5f6; border-radius: 16px; padding: clamp(26px, 4vw, 56px); }
+.plan-zoom { position: absolute; top: 12px; right: 12px; z-index: 1; font-size: 1.55rem; }
+.plan-rooms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; background: #34302d; }
+.plan-room { position: relative; isolation: isolate; display: grid; align-items: end; justify-items: center; min-height: clamp(87px, 10.5vw, 142px); padding: 5px; text-align: center; background: repeating-linear-gradient(90deg, #eaceac 0 9px, #e2c29f 9px 10px); }
+.plan-room > span { padding: 2px 5px; border-radius: 3px; background: #fffc; font-size: clamp(.65rem, 1.1vw, .9rem); }
+.plan-room::before, .plan-room::after { content: ""; position: absolute; z-index: -1; }
+.plan-room-bed::before { inset: 10% 24% 29%; border: 3px solid #947766; border-radius: 5px; background: linear-gradient(#fff9ee 0 24%, #b48b72 24%); }
+.plan-room-living { grid-column: 1 / -1; }
+.plan-room-living::before { inset: 16% auto 33% 13%; width: 34%; border: 5px solid #a7917d; border-radius: 8px; background: #ded1bc; }
+.plan-room-living::after { inset: 21% 18% auto auto; width: 22%; aspect-ratio: 1.45; border-radius: 50%; background: #ad835d; box-shadow: 0 0 0 5px #f1dfc8; }
+.plan-room-kitchen::before { inset: 10% 14% auto; height: 26%; border-radius: 4px; background: #e6e2d9; box-shadow: 0 2px 0 #8d8477; }
+.plan-room-bath { background: #dcd9d2; }
+.plan-room-bath::before { inset: 12% 17% 36%; border-radius: 6px; background: #fffdf9; border: 2px solid #aaa49b; }
+.project-plan figcaption { margin-top: 20px; }
+.plan-specs { display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--project-blue); font-weight: 600; }
+.plan-specs span::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--hero-accent); }
+#plano-area { color: var(--project-blue); font-size: clamp(1.9rem, 4vw, 3rem); }
+.plan-dialog { width: min(90vw, 620px); max-height: 90dvh; padding: clamp(14px, 3vw, 26px); border: 0; border-radius: 18px; color: var(--ink); }
+.plan-dialog::backdrop { background: #112c3bc9; }
+.plan-dialog-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; }
+.project-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; }
 .project-form > :is(h3, p, .full) { grid-column: 1 / -1; }
-.project-form h3 { color: var(--project-blue); }
+.project-form h3 { color: var(--hero-accent); font-size: clamp(1.9rem, 4vw, 3rem); }
+.project-form > :is(h3, p) { text-align: center; }
+.project-form label { display: grid; align-content: start; gap: 5px; font-size: .875rem; font-weight: 650; }
+#tipo-plano, .project-form input, .project-form textarea { display: block; width: 100%; min-width: 0; min-height: 46px; padding: 10px 14px; border: 1px solid var(--project-blue); border-radius: 999px; background: white; color: var(--ink); }
+.project-form textarea { border-radius: 20px; resize: vertical; }
+.project-form button { justify-self: center; }
 .zone-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px; }
 .zone-map { display: grid; align-content: center; justify-items: center; gap: 24px; min-height: 260px; margin-top: 24px; padding: 16px; border: 1px solid #103e6377; border-radius: 22px; background: repeating-linear-gradient(25deg, transparent 0 46px, #fff 46px 54px), repeating-linear-gradient(115deg, #e4e9e5 0 62px, #fff 62px 71px); }
 .zone-pin, .zone-point { display: inline-block; border-radius: 999px; padding: 6px 12px; color: white; background: var(--project-blue); }
