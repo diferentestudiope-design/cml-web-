@@ -120,16 +120,21 @@ em { font-family: var(--serif); font-weight: 400; }
 .card-overlay { position: absolute; inset: 0; display: grid; place-items: center; background: #103e63cc; color: white; font-size: 1.125rem; font-weight: 700; opacity: 0; transition: opacity .25s; }
 .card-button:focus-visible .card-overlay { opacity: 1; }
 .card-button:focus-visible .card-image img { transform: scale(1.06); }
-.card-body { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: clamp(14px, 2vw, 26px); }
-.card-body > span:first-child { display: grid; justify-items: start; gap: 6px; }
-.card-body small { border-radius: 999px; padding: 3px 10px; background: #f7e8df; color: #893913; font-weight: 700; }
-.card-body strong { color: #103e63; font-size: clamp(1.35rem, 2.35vw, 2.2rem); letter-spacing: -.04em; line-height: 1.15; }
-.card-arrow { display: grid; place-items: center; width: 42px; height: 42px; flex: none; border-radius: 50%; background: var(--hero-accent); color: white; transition: transform .25s; }
+.card-body { display: grid; position: relative; gap: 5px; padding: clamp(14px, 2vw, 26px); text-align: center; }
+.card-title { margin-top: 40px; color: #103e63; font-size: clamp(1.35rem, 2.35vw, 2.2rem); letter-spacing: -.04em; line-height: 1.15; }
+.card-data { display: grid; gap: 8px; }
+.card-status { position: absolute; inset: clamp(14px, 2vw, 26px) clamp(14px, 2vw, 26px) auto; padding: 4px 10px; border-radius: 999px; background: #103e63; color: white; font-size: .875rem; font-weight: 700; }
+.card-location, .card-note { color: var(--muted); }
+.card-stats { display: grid; grid-template-columns: 1.15fr 1fr; margin-top: 8px; border-top: 1px solid #103e6355; font-size: .9rem; }
+.card-measures, .card-price { display: grid; align-content: center; gap: 4px; padding: 10px 4px; }
+.card-measures { text-align: left; }
+.card-price { border-left: 1px solid #103e6355; }
+.card-price b { color: var(--hero-accent); font-size: clamp(.9rem, 1.5vw, 1.25rem); white-space: nowrap; }
+.card-note { font-size: .75rem; }
 @media (hover: hover) {
   .card-button:hover { transform: translateY(-5px); box-shadow: 0 16px 30px #14282b20; }
   .card-button:hover .card-overlay { opacity: 1; }
   .card-button:hover .card-image img { transform: scale(1.06); }
-  .card-button:hover .card-arrow { transform: rotate(8deg); }
 }
 .statement { overflow: hidden; }
 .statement-grid { display: grid; grid-template-columns: .64fr 1.52fr .64fr; align-items: center; gap: 22px; text-align: center; }
