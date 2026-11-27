@@ -77,19 +77,6 @@ function renderProject(project) {
     const typology = typologies.find(({ id }) => id === planSelect.value);
     const bedrooms = Number.parseInt(typology.rooms, 10);
     const bathrooms = bedrooms === 3 ? 2 : 1;
-    const rooms = [
-      ["living", "Sala comedor"], ["kitchen", "Cocina"], ["bath", "Baño"],
-      ...Array.from({ length: bedrooms }, (_, index) => ["bed", "Dormitorio " + (index + 1)]),
-    ];
-    if (bathrooms === 2) rooms.push(["bath", "Baño 2"]);
-    plan.replaceChildren(...rooms.map(([type, name]) => {
-      const room = document.createElement("span");
-      room.className = "plan-room plan-room-" + type;
-      const label = document.createElement("span");
-      label.textContent = name;
-      room.append(label);
-      return room;
-    }));
     select("#plano-dormitorios").textContent = typology.rooms;
     select("#plano-banos").textContent = bathrooms === 1 ? "1 baño" : "2 baños";
     select("#plano-area").textContent = typology.area + " m²";

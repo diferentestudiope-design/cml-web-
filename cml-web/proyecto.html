@@ -6,9 +6,9 @@
   <title>Ficha residencial | Constructora Moreno Linch</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap">
   <link rel="stylesheet" href="./styles.css?v=tarjetas-3">
-  <link rel="stylesheet" href="./proyecto.css?v=plano-1">
+  <link rel="stylesheet" href="./proyecto.css?v=plano-2">
   <script src="./proyectos.js?v=resumen-1" defer></script>
-  <script src="./proyecto.js?v=plano-1" defer></script>
+  <script src="./proyecto.js?v=plano-2" defer></script>
 </head>
 <body class="project-page">
   <header class="project-nav">
@@ -78,13 +78,15 @@
       <div class="project-split quote-layout">
         <figure class="project-plan">
           <div class="plan-display">
-            <div id="plano" class="plan-rooms"></div>
+            <div id="plano" class="plan-reference">
+              <img src="./assets/plano-tipologia-referencial.png" width="626" height="808" alt="Plano ilustrativo amoblado de un departamento de tres dormitorios y dos baños">
+            </div>
             <button id="ampliar-plano" class="plan-zoom" type="button" aria-label="Ampliar plano" aria-haspopup="dialog">⊕</button>
           </div>
           <figcaption>
             <div class="plan-specs"><span id="plano-dormitorios"></span><span id="plano-banos"></span></div>
             <strong id="plano-area"></strong>
-            <p class="sample-note">Distribución y medidas ilustrativas. Plano oficial pendiente.</p>
+            <p class="sample-note">Imagen referencial de 3 dormitorios. Los datos de arriba corresponden a la tipología seleccionada.</p>
           </figcaption>
         </figure>
         <form id="consulta-proyecto" class="project-form">
@@ -103,7 +105,7 @@
       <dialog class="plan-dialog" id="dialogo-plano" aria-labelledby="titulo-plano-ampliado">
         <div class="plan-dialog-heading"><h3 id="titulo-plano-ampliado">Plano ilustrativo</h3><form method="dialog"><button class="pill project-outline" aria-label="Cerrar plano">Cerrar ×</button></form></div>
         <div id="plano-ampliado"></div>
-        <p class="sample-note">Distribución ilustrativa, sin escala.</p>
+        <p class="sample-note">Imagen referencial de 3 dormitorios, sin escala.</p>
       </dialog>
     </section>
 
