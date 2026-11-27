@@ -6,7 +6,7 @@
   <title>Ficha residencial | Constructora Moreno Linch</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap">
   <link rel="stylesheet" href="./styles.css?v=tarjetas-3">
-  <link rel="stylesheet" href="./proyecto.css?v=resumen-3">
+  <link rel="stylesheet" href="./proyecto.css?v=descripcion-1">
   <script src="./proyectos.js?v=resumen-1" defer></script>
   <script src="./proyecto.js?v=resumen-2" defer></script>
 </head>
@@ -25,16 +25,27 @@
       <p class="sample-note">Imágenes y datos de demostración. No constituyen una oferta.</p>
     </div>
 
-    <section class="wrap project-section project-split" aria-labelledby="sobre-titulo">
-      <img class="project-building" id="fachada" src="./assets/torre-a.jpg" alt="Fachada referencial" loading="lazy">
-      <div>
+    <section class="wrap project-section project-split project-overview" id="sobre-proyecto" aria-labelledby="sobre-titulo">
+      <figure class="overview-visual">
+        <div class="overview-brand"><img src="./assets/cml-logo-blanco.png" width="1500" height="363" alt="Constructora Moreno Linch"></div>
+        <img class="project-building" id="fachada" src="./assets/torre-a.jpg" alt="Fachada referencial" loading="lazy">
+      </figure>
+      <div class="overview-copy">
         <h2 id="sobre-titulo">Conoce el proyecto</h2>
         <p id="descripcion"></p>
-        <ul class="project-amenities" aria-label="Áreas comunes de ejemplo"><li>Terraza</li><li>Zona de lectura</li><li>Estacionamiento de bicicletas</li><li>Patio interior</li></ul>
-        <p class="sample-note">Áreas comunes de ejemplo, sujetas a confirmación.</p>
+        <ul class="project-amenities" aria-label="Áreas comunes de ejemplo">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16h18M5 16v5m14-5v5M4 11h16l-8-7-8 7Zm8 0v5"/></svg><span>Terraza</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 17l4-7 4 7m-8 0h8l-2-9h3M10 8H7"/><circle cx="5" cy="17" r="3"/><circle cx="19" cy="17" r="3"/></svg><span>Bicicletas</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-8m0 4c-5 0-8-3-8-8 5 0 8 3 8 8Zm0-3c0-5 3-8 8-8 0 5-3 8-8 8Z"/></svg><span>Patio interior</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-3-2-6-2-9-1v13c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v13"/></svg><span>Sala de lectura</span></li>
+        </ul>
+        <div class="overview-note">
+          <strong>Constructora Moreno Linch</strong>
+          <p class="sample-note">Las áreas comunes, los precios y la disponibilidad son referenciales y están sujetos a confirmación.</p>
+        </div>
         <div class="project-actions">
-          <button type="button" class="pill project-outline" id="imprimir">Guardar ficha ↓</button>
-          <a class="pill project-primary" href="#galeria">Ver recorrido fotográfico →</a>
+          <button type="button" class="pill project-outline" id="imprimir"><span aria-hidden="true">↓</span> Guardar ficha</button>
+          <a class="pill project-primary" href="#galeria">Ver recorrido fotográfico <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
