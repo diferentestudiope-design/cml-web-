@@ -102,3 +102,8 @@
   .project-banner { min-height: auto; color: black; background: white; }
   .project-banner img, .project-banner::after { display: none; }
 }
+
+.residential-facts { grid-template-columns: repeat(auto-fit, minmax(min(100%, 175px), 1fr)); }
+.residential-amenities { display: flex; flex-wrap: wrap; gap: 10px; }
+.residential-amenities li { padding: 9px 13px; border-radius: 999px; background: #f3f5f6; }
+[hidden] { display: none !important; }

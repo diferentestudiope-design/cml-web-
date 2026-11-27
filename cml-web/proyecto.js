@@ -5,12 +5,16 @@ const factIcons = {
 };
 
 const previousIds = { compacto: "x01", flexible: "x02", familiar: "x03", "estudio-urbano": "x04", terraza: "x05", duplex: "x06" };
-const requestedId = new URLSearchParams(location.search).get("tipo");
+const params = new URLSearchParams(location.search);
+const requestedId = params.get("tipo");
 const projectId = Object.hasOwn(previousIds, requestedId) ? previousIds[requestedId] : requestedId;
 const project = typologies.find(({ id }) => id === projectId);
+const residential = currentProjects.find(({ id }) => id === params.get("proyecto") && id !== "torres-del-mall");
 
-if (!project) {
-  document.querySelector("#ficha").innerHTML = '<section class="wrap project-section"><h1>Ficha no encontrada</h1><a class="text-link" href="./index.html#departamentos">Ver departamentos →</a></section>';
+if (residential) {
+  renderResidential(residential);
+} else if (!project) {
+  document.querySelector("#ficha").innerHTML = '<section class="wrap project-section"><h1>Ficha no encontrada</h1><a class="text-link" href="./index.html#departamentos">Ver proyectos →</a></section>';
 } else {
   renderProject(project);
 }
@@ -34,21 +38,9 @@ function renderProject(project) {
     ["Baños", String(project.bathrooms)],
     ["Precio", "Consultar", "area"],
   ];
-  const factPanel = select("#datos");
-  for (const [label, value, icon] of facts) {
-    const fact = document.createElement("div");
-    fact.className = "project-fact";
-    const term = document.createElement("dt");
-    const detail = document.createElement("dd");
-    term.textContent = label;
-    detail.textContent = value;
-    fact.append(term, detail);
-    if (icon) {
-      fact.classList.add("has-fact-icon");
-      term.insertAdjacentHTML("afterbegin", `<svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${factIcons[icon]}</svg>`);
-    }
-    factPanel.append(fact);
-  }
+  renderFacts(facts);
+  const map = select("#mapa-proyecto");
+  map.src = map.dataset.torresSrc;
 
   setupProjectGallery();
 
@@ -71,7 +63,6 @@ function renderProject(project) {
     select("#plano-dormitorios").textContent = typology.rooms;
     select("#plano-banos").textContent = typology.bathrooms === 1 ? "1 baño" : "2 baños";
     select("#plano-area").textContent = typology.area + " m²";
-    select("#plano-fuente").href = torresDelMall.brochure + "#page=" + typology.page;
   }
 
   select("#ampliar-plano").addEventListener("click", () => {
@@ -106,7 +97,89 @@ function renderProject(project) {
   });
 }
 
-function setupProjectGallery() {
+function renderFacts(facts) {
+  const factPanel = document.querySelector("#datos");
+  for (const [label, value, icon] of facts) {
+    const fact = document.createElement("div");
+    fact.className = "project-fact";
+    const term = document.createElement("dt");
+    const detail = document.createElement("dd");
+    term.textContent = label;
+    detail.textContent = value;
+    fact.append(term, detail);
+    if (icon) {
+      fact.classList.add("has-fact-icon");
+      term.insertAdjacentHTML("afterbegin", `<svg class="fact-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${factIcons[icon]}</svg>`);
+    }
+    factPanel.append(fact);
+  }
+
+}
+
+function renderResidential(project) {
+  const select = (selector) => document.querySelector(selector);
+  document.title = project.name + " | Constructora Moreno Linch";
+  select("#marca-ficha").textContent = "Constructora Moreno Linch";
+  select("#nombre-proyecto").textContent = project.name;
+  select("#estado").textContent = "Proyecto actual";
+  select("#portada").src = "./assets/" + project.image;
+  select("#fachada").src = "./assets/" + project.image;
+  select("#fachada").alt = project.name + " · Imagen referencial";
+  select("#descripcion").textContent = project.description;
+  select("#datos-nota").textContent = "Consulta precio y disponibilidad con ventas.";
+  select("#info-venta").textContent = "Imágenes referenciales.";
+  select("#direccion-zona").textContent = project.location + ", Trujillo";
+  select("#accion-ficha").href = "#contacto-proyecto";
+  select("#accion-ficha").textContent = "Contacto comercial ↓";
+
+  const facts = [["Ubicación", project.location, "location"]];
+  if (project.rooms) facts.push(["Dormitorios", project.rooms, "bed"], ["Área", project.area, "area"]);
+  facts.push(["Precio", "Consultar"]);
+  renderFacts(facts);
+  select("#datos").classList.add("residential-facts");
+
+  const amenities = select("#amenidades");
+  amenities.hidden = !project.amenities;
+  if (project.amenities) {
+    amenities.setAttribute("aria-label", "Áreas comunes de " + project.name);
+    amenities.replaceChildren(...project.amenities.map((name) => {
+      const item = document.createElement("li");
+      item.textContent = name;
+      return item;
+    }));
+    amenities.classList.add("residential-amenities");
+  }
+  select("#cotizar").hidden = true;
+  select("#contacto-proyecto").hidden = false;
+  select("#contacto-proyecto-texto").textContent = project.phone
+    ? "Comunícate con el equipo comercial para consultar disponibilidad y precios."
+    : "Consulta en la oficina de CML: Calle Juan Julio Ganoza 475, oficina 1701, Urb. California, Trujillo.";
+  if (project.phone) {
+    const phone = select("#telefono-proyecto");
+    phone.href = "tel:+51" + project.phone.replaceAll(" ", "");
+    phone.textContent = "Llamar al " + project.phone;
+    phone.hidden = false;
+  }
+  const query = encodeURIComponent(project.name + ", " + project.location + ", Trujillo, Perú");
+  const map = select("#mapa-proyecto");
+  map.src = "https://maps.google.com/maps?q=" + query + "&output=embed";
+  map.title = "Ubicación de " + project.name + " en Trujillo";
+  const [google, waze] = document.querySelectorAll("#zona .project-actions a");
+  google.href = "https://www.google.com/maps/search/?api=1&query=" + query;
+  waze.href = "https://www.waze.com/ul?q=" + query + "&navigate=yes";
+  waze.textContent = "Waze ↗";
+
+  for (const related of currentProjects) {
+    if (related.id !== project.id) select("#relacionados").append(createProjectCard(related));
+  }
+  setupProjectGallery([
+    [project.image, project.name],
+    ["proyectos-cml/" + project.id + "-02.jpg", "Vista del proyecto"],
+    ["proyectos-cml/" + project.id + "-03.jpg", "Otra vista del proyecto"],
+  ]);
+}
+
+function setupProjectGallery(projectImages) {
   const gallery = {
     interiores: [
       ["torres-del-mall/04.jpg", "Sala"],
@@ -121,6 +194,10 @@ function setupProjectGallery() {
     ],
   };
   const filters = [...document.querySelectorAll("[data-gallery]")];
+  if (projectImages) {
+    gallery.interiores = projectImages;
+    filters[0].parentElement.hidden = true;
+  }
   const thumbs = document.querySelector("#miniaturas");
   const image = document.querySelector("#galeria-imagen");
   const caption = document.querySelector("#galeria-texto");

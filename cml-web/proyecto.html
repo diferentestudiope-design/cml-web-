@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ficha residencial | Constructora Moreno Linch</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap">
-  <link rel="stylesheet" href="./styles.css?v=proyectos-actuales">
-  <link rel="stylesheet" href="./proyecto.css?v=proyectos-actuales">
-  <script src="./proyectos.js?v=proyectos-actuales" defer></script>
-  <script src="./proyecto.js?v=proyectos-actuales" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=fichas-locales">
+  <link rel="stylesheet" href="./proyecto.css?v=fichas-locales">
+  <script src="./proyectos.js?v=fichas-locales" defer></script>
+  <script src="./proyecto.js?v=fichas-locales" defer></script>
 </head>
 <body class="project-page">
   <header class="project-nav">
@@ -18,11 +18,11 @@
   <main id="ficha">
     <section class="project-banner">
       <img id="portada" src="./assets/interior.jpg" alt="">
-      <div class="wrap banner-text"><p>Torres del Mall</p><h1 id="nombre-proyecto">Ficha residencial</h1><p class="project-status" id="estado"></p></div>
+      <div class="wrap banner-text"><p id="marca-ficha">Torres del Mall</p><h1 id="nombre-proyecto">Ficha residencial</h1><p class="project-status" id="estado"></p></div>
     </section>
     <div class="wrap">
       <dl class="project-facts" id="datos"></dl>
-      <p class="sample-note">Áreas y planos referenciales según el brochure oficial. Consulta precio y disponibilidad con ventas.</p>
+      <p class="sample-note" id="datos-nota">Áreas y planos referenciales según el brochure oficial. Consulta precio y disponibilidad con ventas.</p>
     </div>
 
     <section class="wrap project-section project-split project-overview" id="sobre-proyecto" aria-labelledby="sobre-titulo">
@@ -33,7 +33,7 @@
       <div class="overview-copy">
         <h2 id="sobre-titulo">Tu hogar y su entorno</h2>
         <p id="descripcion"></p>
-        <ul class="project-amenities" aria-label="Áreas comunes de Torres del Mall">
+        <ul id="amenidades" class="project-amenities" aria-label="Áreas comunes de Torres del Mall">
             <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="10" r="2"/><circle cx="10" cy="6" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="20" cy="10" r="2"/><path d="M7 17c0-3 3-6 5-6s5 3 5 6c0 4-3 2-5 2s-5 2-5-2Z"/></svg><span>Zona de mascotas</span></li>
             <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-8m0 4c-5 0-8-3-8-8 5 0 8 3 8 8Zm0-3c0-5 3-8 8-8 0 5-3 8-8 8Z"/></svg><span>Parque interior</span></li>
             <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="2"/><path d="M8 12a4 4 0 0 1 8 0M3 13h18v2H3zM5 15v6h14v-6M8 18h8"/></svg><span>Lobby</span></li>
@@ -41,10 +41,10 @@
         </ul>
         <div class="overview-note">
           <strong>Constructora Moreno Linch</strong>
-          <p class="sample-note">Las áreas, planos e imágenes son referenciales. Consulta con ventas por las características de cada unidad, el precio y la disponibilidad.</p>
+          <p id="info-venta" class="sample-note">Las áreas, planos e imágenes son referenciales. Consulta con ventas por las características de cada unidad, el precio y la disponibilidad.</p>
         </div>
         <div class="project-actions">
-          <a class="pill project-outline" href="https://www.morenolinch.com/images/proyectos/brochure-torres-del-mall-cml-2026.pdf">Ver brochure oficial ↗</a>
+          <a class="pill project-outline" id="accion-ficha" href="#cotizar">Ver tipologías ↓</a>
           <a class="pill project-primary" href="#galeria">Ver recorrido fotográfico <span aria-hidden="true">→</span></a>
         </div>
       </div>
@@ -85,7 +85,7 @@
           <figcaption>
             <div class="plan-specs"><span id="plano-dormitorios"></span><span id="plano-banos"></span></div>
             <strong id="plano-area"></strong>
-            <p class="sample-note">Plano referencial. <a id="plano-fuente" href="https://www.morenolinch.com/images/proyectos/brochure-torres-del-mall-cml-2026.pdf">Ver página del brochure ↗</a></p>
+            <p class="sample-note">Plano referencial del brochure oficial.</p>
           </figcaption>
         </figure>
         <form id="consulta-proyecto" class="project-form">
@@ -108,12 +108,18 @@
       </dialog>
     </section>
 
+    <section class="wrap project-section" id="contacto-proyecto" aria-labelledby="contacto-proyecto-titulo" hidden>
+      <h2 id="contacto-proyecto-titulo">Consulta por este proyecto</h2>
+      <p id="contacto-proyecto-texto"></p>
+      <div class="project-actions"><a class="pill project-primary" id="telefono-proyecto" hidden></a></div>
+    </section>
+
     <section class="wrap project-section" id="zona" aria-labelledby="zona-titulo">
       <div class="zone-heading">
         <div><h2 id="zona-titulo">Conoce la zona</h2><p id="direccion-zona"></p></div>
         <div class="project-actions"><a class="pill project-outline" href="https://www.google.com/maps/search/?api=1&amp;query=Torres+del+Mall+Trujillo">Google Maps ↗</a><a class="pill project-outline" href="https://www.waze.com/ul?q=Mallplaza%20Trujillo&amp;navigate=yes">Waze · Mallplaza ↗</a></div>
       </div>
-      <iframe class="zone-map" title="Ubicación de Torres del Mall en Trujillo" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.951529808839!2d-79.04953612362782!3d-8.106418091922624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad3d00515b4177%3A0x453ac0ac044044af!2sTorres+del+Mall!5e0!3m2!1ses-419!2spe"></iframe>
+      <iframe class="zone-map" id="mapa-proyecto" title="Ubicación de Torres del Mall en Trujillo" loading="lazy" data-torres-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.951529808839!2d-79.04953612362782!3d-8.106418091922624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad3d00515b4177%3A0x453ac0ac044044af!2sTorres+del+Mall!5e0!3m2!1ses-419!2spe"></iframe>
     </section>
 
     <section class="wrap project-section project-related" aria-labelledby="relacionados-titulo">

@@ -1,16 +1,15 @@
 const torresDelMall = {
   location: "Av. Jesús de Nazareth con Av. América Oeste, Trujillo",
-  brochure: "https://www.morenolinch.com/images/proyectos/brochure-torres-del-mall-cml-2026.pdf",
   rooms: "3 dormitorios",
 };
 
 const typologies = [
-  { id: "x01", area: "63.90", bathrooms: 2, page: 27, image: "01" },
-  { id: "x02", area: "54.90", bathrooms: 1, page: 27, image: "02" },
-  { id: "x03", area: "64.20", bathrooms: 2, page: 28, image: "03" },
-  { id: "x04", area: "63.50", bathrooms: 2, page: 28, image: "04" },
-  { id: "x05", area: "52.70", bathrooms: 1, page: 29, image: "09" },
-  { id: "x06", area: "63.50", bathrooms: 2, page: 29, image: "10" },
+  { id: "x01", area: "63.90", bathrooms: 2, image: "01" },
+  { id: "x02", area: "54.90", bathrooms: 1, image: "02" },
+  { id: "x03", area: "64.20", bathrooms: 2, image: "03" },
+  { id: "x04", area: "63.50", bathrooms: 2, image: "04" },
+  { id: "x05", area: "52.70", bathrooms: 1, image: "09" },
+  { id: "x06", area: "63.50", bathrooms: 2, image: "10" },
 ].map((typology) => ({
   ...typology,
   name: "Tipología " + typology.id.toUpperCase(),
@@ -20,10 +19,10 @@ const typologies = [
 }));
 
 const currentProjects = [
-  { id: "legend", name: "Legend Residencial", location: "Calle Colombia 114 · Urb. El Recreo", image: "proyectos-cml/legend.jpg", href: "https://www.morenolinch.com/residencial_legend.html", rooms: "1, 2 y 3 dormitorios", area: "51.64 a 153.59 m²" },
+  { id: "legend", name: "Legend Residencial", location: "Calle Colombia 114 · Urb. El Recreo", image: "proyectos-cml/legend.jpg", href: "./proyecto.html?proyecto=legend", phone: "959 287 595", description: "Legend Residencial está en la urbanización El Recreo, en el centro de Trujillo. Ofrece departamentos de uno, dos y tres dormitorios. Entre las áreas comunes se incluyen coworking, gimnasio, un salón de usos múltiples, una terraza y zona de parrillas.", amenities: ["Lobby", "Coworking", "Coffee lounge", "Gimnasio", "Salón de usos múltiples", "Terraza", "Zona de parrillas"], rooms: "1, 2 y 3 dormitorios", area: "51.64 a 153.59 m²" },
   { id: "torres-del-mall", name: "Torres del Mall - Condominio", location: "Junto a Mallplaza Trujillo", image: "torres-del-mall/01.jpg", href: "./proyecto.html?tipo=x01", rooms: "3 dormitorios", area: "52.70 a 64.20 m²" },
-  { id: "mam290", name: "MAM 290 California", location: "Calle Juan Julio Ganoza 475 · Urb. California", image: "proyectos-cml/mam290.jpg", href: "https://www.morenolinch.com/mam290_home_and_office.html", rooms: "1, 2 y 3 dormitorios", area: "56.05 a 120.97 m²" },
-  { id: "infinity", name: "Infinity Apartments", location: "Av. Las Palmas con Calle Las Capullanas · Urb. El Golf", image: "proyectos-cml/infinity.jpg", href: "https://www.morenolinch.com/infinity_apartments.html" },
+  { id: "mam290", name: "MAM 290 California", location: "Calle Juan Julio Ganoza 475 · Urb. California", image: "proyectos-cml/mam290.jpg", href: "./proyecto.html?proyecto=mam290", phone: "943 412 626", description: "MAM 290 California reúne departamentos y oficinas en la urbanización California, cerca del Parque Grande. Los departamentos tienen uno, dos o tres dormitorios. El proyecto incluye espacios de trabajo, descanso y reunión.", amenities: ["Lobby", "Coworking", "Coffee lounge", "Zona de ocio", "Terraza", "Zona de parrillas"], rooms: "1, 2 y 3 dormitorios", area: "56.05 a 120.97 m²" },
+  { id: "infinity", name: "Infinity Apartments", location: "Av. Las Palmas con Calle Las Capullanas · Urb. El Golf", image: "proyectos-cml/infinity.jpg", href: "./proyecto.html?proyecto=infinity", description: "Infinity Apartments está en la urbanización El Golf de Trujillo, en la esquina de la avenida Las Palmas con la calle Las Capullanas." },
 ];
 
 function createProjectCard(project) {
