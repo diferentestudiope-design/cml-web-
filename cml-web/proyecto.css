@@ -7,12 +7,13 @@
 .banner-text { padding-block: 60px 92px; }
 .banner-text h1 { font-size: clamp(3rem, 9vw, 8rem); margin: 10px 0 20px; }
 .project-status { display: inline-block; background: var(--hero-accent); padding: 7px 16px; border-radius: 999px; font-weight: 700; }
-.project-facts { font-family: Manrope, Inter, var(--sans); position: relative; display: grid; grid-template-columns: 1.2fr 1fr .85fr .85fr 1.1fr; align-items: stretch; margin: -48px 0 14px; padding: clamp(16px, 2.5vw, 32px); border-radius: 24px; background: #fff; box-shadow: 0 24px 48px #14282b30; }
-.project-fact { position: relative; display: grid; align-content: center; gap: 2px; min-width: 0; padding: 6px clamp(8px, 1.4vw, 22px); }
+.project-facts { font-family: Manrope, Inter, var(--sans); position: relative; display: grid; grid-template-columns: 1.22fr 1.06fr .74fr .74fr 1.14fr; align-items: stretch; margin: -48px 0 14px; padding: clamp(12px, 1.55vw, 22px) clamp(14px, 2.2vw, 28px); border-radius: 24px; background: #fff; box-shadow: 0 24px 48px #14282b30; }
+.project-fact { position: relative; display: grid; align-content: center; gap: 2px; min-width: 0; padding: 4px clamp(8px, 1.4vw, 22px); }
 .project-fact:is(:nth-child(2), :nth-child(3), :nth-child(5)) { border-inline-start: 1px solid #103e6380; }
 .project-fact.has-fact-icon { padding-inline-start: clamp(38px, 5vw, 74px); }
 .fact-icon { position: absolute; inset-inline-start: clamp(5px, 1vw, 16px); top: 50%; width: clamp(25px, 3.5vw, 50px); height: auto; translate: 0 -50%; color: var(--hero-accent); }
-.project-fact:nth-child(4)::before { content: ""; position: absolute; inset-inline-start: -5px; top: 50%; translate: 0 -50%; border-block: 7px solid transparent; border-inline-start: 9px solid var(--hero-accent); }
+.project-fact:is(:nth-child(3), :nth-child(4)) { justify-items: center; text-align: center; }
+.project-fact:nth-child(4)::before { content: ""; position: absolute; inset-inline-start: -5px; top: 50%; translate: 0 -50%; border-block: 8px solid transparent; border-inline-start: 10px solid var(--hero-accent); }
 .project-fact dt { color: var(--muted); font-size: clamp(.85rem, 1.2vw, 1rem); }
 .project-fact dd { margin: 0; color: var(--project-blue); font-weight: 700; font-size: clamp(1rem, 1.85vw, 1.5rem); overflow-wrap: anywhere; }
 .sample-note { font-size: .875rem; color: var(--muted); }
