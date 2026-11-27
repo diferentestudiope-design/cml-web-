@@ -2,7 +2,7 @@ const contactEmail = "torresdelmall@morenolinch.com";
 
 const interest = document.querySelector("#interes");
 const catalog = document.querySelector("#project-catalog");
-const projectsMenu = document.querySelector(".projects-menu");
+const projectsMenu = document.querySelector("#menu-actuales");
 
 for (const project of currentProjects) {
   const link = document.createElement("a");
@@ -30,28 +30,31 @@ updateHeader();
 
 const menu = document.querySelector(".menu");
 const nav = document.querySelector("#navegacion");
+const projectMenus = [...nav.querySelectorAll(".projects-menu")];
+
 function closeMenu() {
   menu.setAttribute("aria-expanded", "false");
+  for (const dropdown of projectMenus) dropdown.open = false;
 }
 menu.addEventListener("click", () => {
-  menu.setAttribute("aria-expanded", String(menu.getAttribute("aria-expanded") === "false"));
+  if (menu.getAttribute("aria-expanded") === "true") closeMenu();
+  else menu.setAttribute("aria-expanded", "true");
 });
 nav.addEventListener("click", (event) => {
-  if (event.target.closest("a")) {
-    projectsMenu.open = false;
-    closeMenu();
-  }
+  if (event.target.closest("a")) closeMenu();
 });
 document.addEventListener("click", (event) => {
-  if (!projectsMenu.contains(event.target)) projectsMenu.open = false;
+  for (const dropdown of projectMenus) {
+    if (!dropdown.contains(event.target)) dropdown.open = false;
+  }
 });
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && projectsMenu.open) {
-    projectsMenu.open = false;
-    projectsMenu.querySelector("summary").focus();
-    return;
-  }
-  if (event.key === "Escape" && menu.getAttribute("aria-expanded") === "true") {
+  if (event.key !== "Escape") return;
+  const openDropdown = projectMenus.find((dropdown) => dropdown.open);
+  if (openDropdown) {
+    openDropdown.open = false;
+    openDropdown.querySelector("summary").focus();
+  } else if (menu.getAttribute("aria-expanded") === "true") {
     closeMenu();
     menu.focus();
   }
