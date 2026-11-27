@@ -239,3 +239,27 @@ dialog::backdrop { background: #14282bd6; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }
+
+@media (any-hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .cml-pointer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    right: auto;
+    bottom: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--hero-accent);
+    box-shadow: 0 0 0 1px #fff9;
+    pointer-events: none;
+    translate: -50% -50%;
+    transition: scale .15s ease;
+  }
+  .cml-pointer.is-action { scale: 1.4; }
+  html.has-cml-pointer, html.has-cml-pointer * { cursor: none; }
+}
