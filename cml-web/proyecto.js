@@ -101,13 +101,19 @@ function renderProject(project) {
 
 function setupProjectGallery(project) {
   const gallery = {
-    interiores: [["interior.jpg", "Sala y comedor"]],
-    exteriores: [[project.image, "Fachada"], ["terraza.jpg", "Terraza"]],
+    interiores: [
+      ["interior.jpg", "Sala y comedor"],
+      ["interior.jpg", "Detalle de la sala", "85% 70%"],
+      ["interior.jpg", "Detalle del ventanal", "65% 35%"],
+    ],
+    exteriores: [[project.image, "Fachada"], ["terraza.jpg", "Terraza"], ["hero.jpg", "Conjunto residencial"]],
   };
   const filters = [...document.querySelectorAll("[data-gallery]")];
   const thumbs = document.querySelector("#miniaturas");
   const image = document.querySelector("#galeria-imagen");
   const caption = document.querySelector("#galeria-texto");
+  const preview = document.querySelector("#galeria-siguiente");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const previous = document.querySelector(".gallery-prev");
   const next = document.querySelector(".gallery-next");
   let category = "interiores";
@@ -116,22 +122,31 @@ function setupProjectGallery(project) {
   function showImage(nextIndex) {
     const images = gallery[category];
     index = (nextIndex + images.length) % images.length;
-    const [file, label] = images[index];
-    image.src = "./assets/" + file;
+    const [file, label, origin] = images[index];
+    setGalleryImage(image, file, origin);
+    const [nextFile, , nextOrigin] = images[(index + 1) % images.length];
+    setGalleryImage(preview, nextFile, nextOrigin);
+    if (!reducedMotion.matches) image.animate([{ opacity: .5 }, { opacity: 1 }], { duration: 320 });
     image.alt = label + " · Imagen referencial";
     caption.textContent = label;
     [...thumbs.children].forEach((button, i) => button.setAttribute("aria-pressed", String(index === i)));
   }
 
+  function setGalleryImage(target, file, origin) {
+    target.src = "./assets/" + file;
+    target.style.transformOrigin = origin || "";
+    target.classList.toggle("gallery-detail", Boolean(origin));
+  }
+
   function renderCategory() {
     const images = gallery[category];
     filters.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.gallery === category)));
-    thumbs.replaceChildren(...images.map(([file, label], i) => {
+    thumbs.replaceChildren(...images.map(([file, label, origin], i) => {
       const button = document.createElement("button");
       const thumb = document.createElement("img");
       button.type = "button";
       button.setAttribute("aria-label", label);
-      thumb.src = "./assets/" + file;
+      setGalleryImage(thumb, file, origin);
       thumb.alt = "";
       button.append(thumb);
       button.addEventListener("click", () => showImage(i));

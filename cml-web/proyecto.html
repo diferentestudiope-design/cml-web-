@@ -6,9 +6,9 @@
   <title>Ficha residencial | Constructora Moreno Linch</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap">
   <link rel="stylesheet" href="./styles.css?v=tarjetas-3">
-  <link rel="stylesheet" href="./proyecto.css?v=descripcion-5">
+  <link rel="stylesheet" href="./proyecto.css?v=galeria-1">
   <script src="./proyectos.js?v=resumen-1" defer></script>
-  <script src="./proyecto.js?v=descripcion-5" defer></script>
+  <script src="./proyecto.js?v=galeria-1" defer></script>
 </head>
 <body class="project-page">
   <header class="project-nav">
@@ -57,12 +57,15 @@
           <button type="button" class="pill" data-gallery="interiores" aria-pressed="true">Interiores</button>
           <button type="button" class="pill" data-gallery="exteriores" aria-pressed="false">Exteriores</button>
         </div>
-        <figure class="gallery-stage">
-          <img id="galeria-imagen" src="./assets/interior.jpg" alt="">
-          <figcaption id="galeria-texto" aria-live="polite"></figcaption>
+        <div class="gallery-frame">
+          <figure class="gallery-stage">
+            <img id="galeria-imagen" src="./assets/interior.jpg" alt="">
+            <figcaption id="galeria-texto" aria-live="polite"></figcaption>
+          </figure>
+          <div class="gallery-preview" aria-hidden="true"><img id="galeria-siguiente" alt=""></div>
           <button type="button" class="gallery-prev" aria-label="Imagen anterior">‹</button>
           <button type="button" class="gallery-next" aria-label="Imagen siguiente">›</button>
-        </figure>
+        </div>
         <div class="gallery-thumbs" id="miniaturas" role="group" aria-label="Elegir imagen"></div>
       </div>
     </section>
