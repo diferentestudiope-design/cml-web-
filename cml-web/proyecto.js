@@ -12,7 +12,8 @@ const project = typologies.find(({ id }) => id === projectId);
 const residential = currentProjects.find(({ id }) => id === params.get("proyecto") && id !== "torres-del-mall");
 
 if (residential) {
-  renderResidential(residential);
+  if (residential.status === "upcoming") renderUpcoming(residential);
+  else renderResidential(residential);
 } else if (!project) {
   document.querySelector("#ficha").innerHTML = '<section class="wrap project-section"><h1>Ficha no encontrada</h1><a class="text-link" href="./index.html#departamentos">Ver proyectos →</a></section>';
 } else {
@@ -23,6 +24,7 @@ function renderProject(project) {
   const select = (selector) => document.querySelector(selector);
   document.title = project.name + " | Torres del Mall";
   select("#nombre-proyecto").textContent = project.name;
+  select("#estado").textContent = projectStatuses.available;
   select("#portada").src = "./assets/torres-del-mall/02.jpg";
   select("#fachada").src = "./assets/torres-del-mall/01.jpg";
   select("#descripcion").textContent =
@@ -116,25 +118,43 @@ function renderFacts(facts) {
 
 }
 
+function renderUpcoming(project) {
+  document.title = project.name + " | Constructora Moreno Linch";
+  document.querySelector("#marca-ficha").textContent = "Constructora Moreno Linch";
+  document.querySelector("#nombre-proyecto").textContent = project.name;
+  document.querySelector("#estado").textContent = projectStatuses.upcoming;
+  document.querySelector("#portada").src = "./assets/" + project.image;
+  document.querySelector("#logo-lanzamiento").hidden = false;
+  document.querySelector(".project-banner").classList.add("launch-banner");
+  for (const selector of ["#datos", "#datos-nota", "#sobre-proyecto", "#galeria", "#cotizar", "#zona"]) {
+    document.querySelector(selector).hidden = true;
+  }
+  for (const related of currentProjects) {
+    if (related.status === "available") document.querySelector("#relacionados").append(createProjectCard(related));
+  }
+}
+
 function renderResidential(project) {
   const select = (selector) => document.querySelector(selector);
   document.title = project.name + " | Constructora Moreno Linch";
   select("#marca-ficha").textContent = "Constructora Moreno Linch";
   select("#nombre-proyecto").textContent = project.name;
-  select("#estado").textContent = "Proyecto actual";
+  select("#estado").textContent = projectStatuses[project.status];
   select("#portada").src = "./assets/" + project.image;
   select("#fachada").src = "./assets/" + project.image;
   select("#fachada").alt = project.name + " · Imagen referencial";
   select("#descripcion").textContent = project.description;
+  select("#datos-nota").hidden = project.status === "sold";
   select("#datos-nota").textContent = "Consulta precio y disponibilidad con ventas.";
   select("#info-venta").textContent = "Imágenes referenciales.";
   select("#direccion-zona").textContent = project.location + ", Trujillo";
+  select("#accion-ficha").hidden = project.status === "sold";
   select("#accion-ficha").href = "#contacto-proyecto";
   select("#accion-ficha").textContent = "Contacto comercial ↓";
 
   const facts = [["Ubicación", project.location, "location"]];
   if (project.rooms) facts.push(["Dormitorios", project.rooms, "bed"], ["Área", project.area, "area"]);
-  facts.push(["Precio", "Consultar"]);
+  if (project.status === "available") facts.push(["Precio", "Consultar"]);
   renderFacts(facts);
   select("#datos").classList.add("residential-facts");
 
@@ -150,7 +170,7 @@ function renderResidential(project) {
     amenities.classList.add("residential-amenities");
   }
   select("#cotizar").hidden = true;
-  select("#contacto-proyecto").hidden = false;
+  select("#contacto-proyecto").hidden = project.status === "sold";
   select("#contacto-proyecto-texto").textContent = project.phone
     ? "Comunícate con el equipo comercial para consultar disponibilidad y precios."
     : "Consulta en la oficina de CML: Calle Juan Julio Ganoza 475, oficina 1701, Urb. California, Trujillo.";
