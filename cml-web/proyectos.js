@@ -25,30 +25,3 @@ function createProjectCard(typology) {
     </a>`;
   return card;
 }
-
-const pointerPreference = matchMedia("(any-hover: hover) and (any-pointer: fine) and (prefers-reduced-motion: no-preference)");
-const customPointer = document.createElement("div");
-customPointer.className = "cml-pointer";
-customPointer.setAttribute("aria-hidden", "true");
-customPointer.hidden = true;
-document.body.append(customPointer);
-
-function hideCustomPointer() {
-  customPointer.hidden = true;
-}
-
-document.addEventListener("pointermove", (event) => {
-  if (!pointerPreference.matches || event.pointerType !== "mouse" ||
-      !(event.target instanceof Element) ||
-      event.target.closest("input, textarea, select, [contenteditable], dialog")) {
-    hideCustomPointer();
-    return;
-  }
-
-  customPointer.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-  customPointer.hidden = false;
-});
-document.documentElement.addEventListener("pointerleave", hideCustomPointer);
-window.addEventListener("blur", hideCustomPointer);
-document.addEventListener("keydown", hideCustomPointer);
-pointerPreference.addEventListener("change", hideCustomPointer);
