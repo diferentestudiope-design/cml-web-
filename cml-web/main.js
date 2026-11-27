@@ -16,8 +16,8 @@ for (const typology of typologies) {
   card.className = "catalog-card";
   card.dataset.reveal = "";
   card.innerHTML = `
-    <button class="card-button" type="button">
-      <span class="card-image"><img src="./assets/${typology.image}" alt="" loading="lazy"></span>
+    <button class="card-button" type="button" aria-label="Ver detalles de ${typology.name}, ${typology.rooms}" aria-haspopup="dialog">
+      <span class="card-image"><img src="./assets/${typology.image}" alt="" loading="lazy"><span class="card-overlay" aria-hidden="true">Ver detalles</span></span>
       <span class="card-body">
         <span><small>${typology.rooms}</small><strong>${typology.name}</strong></span>
         <span class="card-arrow" aria-hidden="true">↗</span>
