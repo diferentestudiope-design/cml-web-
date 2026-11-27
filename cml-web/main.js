@@ -1,4 +1,4 @@
-const contactEmail = ""; // Correo comercial oficial, cuando esté disponible.
+const contactEmail = "torresdelmall@morenolinch.com";
 
 const interest = document.querySelector("#interes");
 const catalog = document.querySelector("#typologies");

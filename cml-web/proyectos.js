@@ -1,11 +1,23 @@
+const torresDelMall = {
+  location: "Av. Jesús de Nazareth con Av. América Oeste, Trujillo",
+  brochure: "https://www.morenolinch.com/images/proyectos/brochure-torres-del-mall-cml-2026.pdf",
+  rooms: "3 dormitorios",
+};
+
 const typologies = [
-  { id: "compacto", name: "Compacto", rooms: "1 dormitorio", image: "torre-a.jpg", status: "En construcción", location: "Av. Los Álamos 120", area: 38, maxArea: 46, price: "198,000", description: "Una distribución para quienes buscan independencia y un espacio fácil de organizar." },
-  { id: "flexible", name: "Flexible", rooms: "2 dormitorios", image: "torre-b.jpg", status: "En construcción", location: "Jr. Las Moreras 240", area: 57, maxArea: 68, price: "279,000", description: "Un segundo ambiente para compartir, trabajar desde casa o recibir visitas." },
-  { id: "familiar", name: "Familiar", rooms: "3 dormitorios", image: "torre-c.jpg", status: "Entrega inmediata", location: "Av. Los Jardines 360", area: 81, maxArea: 96, price: "379,000", description: "Ambientes diferenciados para combinar privacidad y momentos en familia." },
-  { id: "estudio-urbano", name: "Estudio Urbano", rooms: "1 dormitorio", image: "hero.jpg", status: "Lanzamiento", location: "Jr. Los Cipreses 185", area: 34, maxArea: 42, price: "179,000", description: "Una distribución compacta con sala y comedor integrados y un dormitorio independiente." },
-  { id: "terraza", name: "Terraza", rooms: "2 dormitorios", image: "torre-a.jpg", status: "En construcción", location: "Av. Las Acacias 480", area: 64, maxArea: 76, price: "325,000", description: "Dos dormitorios y un área social conectada con una terraza para disfrutar al aire libre." },
-  { id: "duplex", name: "Dúplex", rooms: "3 dormitorios", image: "torre-b.jpg", status: "Lanzamiento", location: "Jr. Los Olivos 295", area: 104, maxArea: 122, price: "489,000", description: "Una distribución de dos niveles que separa las áreas de reunión de los dormitorios." },
-];
+  { id: "x01", area: "63.90", bathrooms: 2, page: 27, image: "01" },
+  { id: "x02", area: "54.90", bathrooms: 1, page: 27, image: "02" },
+  { id: "x03", area: "64.20", bathrooms: 2, page: 28, image: "03" },
+  { id: "x04", area: "63.50", bathrooms: 2, page: 28, image: "04" },
+  { id: "x05", area: "52.70", bathrooms: 1, page: 29, image: "09" },
+  { id: "x06", area: "63.50", bathrooms: 2, page: 29, image: "10" },
+].map((typology) => ({
+  ...typology,
+  name: "Tipología " + typology.id.toUpperCase(),
+  rooms: torresDelMall.rooms,
+  image: "torres-del-mall/" + typology.image + ".jpg",
+  plan: "torres-del-mall/" + typology.id + ".jpg",
+}));
 
 function createProjectCard(typology) {
   const card = document.createElement("article");
@@ -16,13 +28,13 @@ function createProjectCard(typology) {
       <span class="card-body">
         <strong class="card-title" id="card-title-${typology.id}">${typology.name}</strong>
         <span class="card-data" id="card-data-${typology.id}">
-          <span class="card-status">${typology.status}</span>
-          <span class="card-location">${typology.location}</span>
+          <span class="card-status">Torre A</span>
+          <span class="card-location">Junto a Mallplaza Trujillo</span>
           <span class="card-stats">
-            <span class="card-measures"><span>${typology.rooms}</span><span>Desde <b>${typology.area} m²</b></span></span>
-            <span class="card-price"><small>Desde</small><b>S/ ${typology.price}</b></span>
+            <span class="card-measures"><span>${typology.rooms}</span><span><b>${typology.area} m²</b></span></span>
+            <span class="card-price"><small>Precio</small><b>Consultar</b></span>
           </span>
-          <small class="card-note">Datos ficticios · No constituyen una oferta</small>
+          <small class="card-note">Área referencial según brochure</small>
         </span>
       </span>
     </a>`;

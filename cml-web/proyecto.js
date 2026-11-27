@@ -4,7 +4,9 @@ const factIcons = {
   area: '<path d="M7 3h12a2 2 0 0 1 2 2v12M3 7v12a2 2 0 0 0 2 2h12M1 7l2-3 2 3m12 12 3 2-3 2M6 15v-4a2 2 0 0 1 4 0v4m0-4a2 2 0 0 1 4 0v4m2-7a1.5 1.5 0 1 1 2.5 1L16 11h3"/>',
 };
 
-const projectId = new URLSearchParams(location.search).get("tipo");
+const previousIds = { compacto: "x01", flexible: "x02", familiar: "x03", "estudio-urbano": "x04", terraza: "x05", duplex: "x06" };
+const requestedId = new URLSearchParams(location.search).get("tipo");
+const projectId = Object.hasOwn(previousIds, requestedId) ? previousIds[requestedId] : requestedId;
 const project = typologies.find(({ id }) => id === projectId);
 
 if (!project) {
@@ -17,22 +19,20 @@ function renderProject(project) {
   const select = (selector) => document.querySelector(selector);
   document.title = project.name + " | Torres del Mall";
   select("#nombre-proyecto").textContent = project.name;
-  select("#portada").src = "./assets/" + project.image;
-  select("#fachada").src = "./assets/" + project.image;
-  select("#estado").textContent = project.status + " · Referencial";
+  select("#portada").src = "./assets/torres-del-mall/02.jpg";
+  select("#fachada").src = "./assets/torres-del-mall/01.jpg";
   select("#descripcion").textContent =
-    "Torres del Mall presenta la tipología " + project.name + ", una propuesta residencial de " +
-    project.rooms + " con áreas referenciales de " + project.area + " a " + project.maxArea + " m². " +
-    project.description + " La ubicación de ejemplo es " + project.location +
-    ". Las áreas comunes ilustran espacios para trabajar, leer y compartir. " +
-    "Explora la galería y compara las distribuciones.";
-  select("#direccion-zona").textContent = project.location + " · Dirección ficticia";
+    "Torres del Mall es un condominio de cuatro torres junto a Mallplaza Trujillo. En la Torre A, la " +
+    project.name + " cuenta con " + project.area + " m² referenciales, tres dormitorios, sala-comedor, cocina-lavandería y " +
+    (project.bathrooms === 1 ? "un baño." : "dos baños.") +
+    " El proyecto incluye un parque interior de 1.482 m², zonas de juego, coworking, terrazas, parrillas y un espacio para mascotas.";
+  select("#direccion-zona").textContent = torresDelMall.location;
   const facts = [
-    ["Ubicación", project.location, "location"],
+    ["Ubicación", "Mallplaza Trujillo", "location"],
     ["Dormitorios", project.rooms, "bed"],
-    ["Desde", project.area + " m²"],
-    ["Hasta", project.maxArea + " m²"],
-    ["Precio desde", "S/ " + project.price, "area"],
+    ["Área", project.area + " m²"],
+    ["Baños", String(project.bathrooms)],
+    ["Precio", "Consultar", "area"],
   ];
   const factPanel = select("#datos");
   for (const [label, value, icon] of facts) {
@@ -50,29 +50,13 @@ function renderProject(project) {
     factPanel.append(fact);
   }
 
-  select("#imprimir").addEventListener("click", () => window.print());
-  setupProjectGallery(project);
+  setupProjectGallery();
 
   const planSelect = select("#tipo-plano");
-  const planOptions = select("#plan-opciones");
   const plan = select("#plano");
   const planDialog = select("#dialogo-plano");
   for (const typology of typologies) {
     planSelect.add(new Option(typology.name + " · " + typology.area + " m²", typology.id));
-  }
-  for (const rooms of new Set(typologies.map(({ rooms }) => rooms))) {
-    const shortcut = document.createElement("button");
-    shortcut.type = "button";
-    shortcut.value = rooms;
-    shortcut.textContent = Number.parseInt(rooms, 10);
-    shortcut.setAttribute("aria-label", rooms);
-    shortcut.addEventListener("click", () => {
-      if (shortcut.getAttribute("aria-pressed") === "true") return;
-      const match = project.rooms === rooms ? project : typologies.find((typology) => typology.rooms === rooms);
-      planSelect.value = match.id;
-      renderPlan();
-    });
-    planOptions.append(shortcut);
   }
   const projectIndex = typologies.indexOf(project);
   for (const offset of [1, 2]) {
@@ -82,14 +66,13 @@ function renderProject(project) {
 
   function renderPlan() {
     const typology = typologies.find(({ id }) => id === planSelect.value);
-    const bedrooms = Number.parseInt(typology.rooms, 10);
-    const bathrooms = bedrooms === 3 ? 2 : 1;
+    const planImage = plan.querySelector("img");
+    planImage.src = "./assets/" + typology.plan;
+    planImage.alt = "Plano de Torre A, " + typology.name + ", " + typology.area + " m²";
     select("#plano-dormitorios").textContent = typology.rooms;
-    select("#plano-banos").textContent = bathrooms === 1 ? "1 baño" : "2 baños";
+    select("#plano-banos").textContent = typology.bathrooms === 1 ? "1 baño" : "2 baños";
     select("#plano-area").textContent = typology.area + " m²";
-    for (const shortcut of planOptions.children) {
-      shortcut.setAttribute("aria-pressed", String(shortcut.value === typology.rooms));
-    }
+    select("#plano-fuente").href = torresDelMall.brochure + "#page=" + typology.page;
   }
 
   select("#ampliar-plano").addEventListener("click", () => {
@@ -122,17 +105,21 @@ function renderProject(project) {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     select("#consulta-estado").textContent = "Consulta descargada. Los datos no se enviaron.";
   });
-  setupProjectZone();
 }
 
-function setupProjectGallery(project) {
+function setupProjectGallery() {
   const gallery = {
     interiores: [
-      ["interior.jpg", "Sala y comedor"],
-      ["interior.jpg", "Detalle de la sala", "85% 70%"],
-      ["interior.jpg", "Detalle del ventanal", "65% 35%"],
+      ["torres-del-mall/04.jpg", "Sala"],
+      ["torres-del-mall/06.jpg", "Coworking"],
+      ["torres-del-mall/08.jpg", "Sala de entretenimiento"],
     ],
-    exteriores: [[project.image, "Fachada"], ["terraza.jpg", "Terraza"], [project.image === "hero.jpg" ? "torre-c.jpg" : "hero.jpg", "Conjunto residencial"]],
+    exteriores: [
+      ["torres-del-mall/01.jpg", "Ingreso al condominio"],
+      ["torres-del-mall/02.jpg", "Parque interior"],
+      ["torres-del-mall/03.jpg", "Juegos para niños"],
+      ["torres-del-mall/09.jpg", "Terraza lounge"],
+    ],
   };
   const filters = [...document.querySelectorAll("[data-gallery]")];
   const thumbs = document.querySelector("#miniaturas");
@@ -148,31 +135,25 @@ function setupProjectGallery(project) {
   function showImage(nextIndex) {
     const images = gallery[category];
     index = (nextIndex + images.length) % images.length;
-    const [file, label, origin] = images[index];
-    setGalleryImage(image, file, origin);
-    const [nextFile, , nextOrigin] = images[(index + 1) % images.length];
-    setGalleryImage(preview, nextFile, nextOrigin);
+    const [file, label] = images[index];
+    image.src = "./assets/" + file;
+    const [nextFile] = images[(index + 1) % images.length];
+    preview.src = "./assets/" + nextFile;
     if (!reducedMotion.matches) image.animate([{ opacity: .5 }, { opacity: 1 }], { duration: 320 });
     image.alt = label + " · Imagen referencial";
     caption.textContent = label;
     [...thumbs.children].forEach((button, i) => button.setAttribute("aria-pressed", String(index === i)));
   }
 
-  function setGalleryImage(target, file, origin) {
-    target.src = "./assets/" + file;
-    target.style.transformOrigin = origin || "";
-    target.classList.toggle("gallery-detail", Boolean(origin));
-  }
-
   function renderCategory() {
     const images = gallery[category];
     filters.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.gallery === category)));
-    thumbs.replaceChildren(...images.map(([file, label, origin], i) => {
+    thumbs.replaceChildren(...images.map(([file, label], i) => {
       const button = document.createElement("button");
       const thumb = document.createElement("img");
       button.type = "button";
       button.setAttribute("aria-label", label);
-      setGalleryImage(thumb, file, origin);
+      thumb.src = "./assets/" + file;
       thumb.alt = "";
       button.append(thumb);
       button.addEventListener("click", () => showImage(i));
@@ -189,29 +170,4 @@ function setupProjectGallery(project) {
   previous.addEventListener("click", () => showImage(index - 1));
   next.addEventListener("click", () => showImage(index + 1));
   renderCategory();
-}
-
-function setupProjectZone() {
-  const filters = document.querySelector("#zona-filtros");
-  const points = document.querySelector("#zona-puntos");
-  const categories = ["General", "Comercios", "Estudios", "Restaurantes"];
-  for (const category of categories) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "pill";
-    button.textContent = category;
-    button.setAttribute("aria-pressed", "false");
-    button.addEventListener("click", () => {
-      [...filters.children].forEach((control) => control.setAttribute("aria-pressed", String(control === button)));
-      const visible = category === "General" ? categories.slice(1) : [category];
-      points.replaceChildren(...visible.map((label) => {
-        const pin = document.createElement("span");
-        pin.className = "zone-point";
-        pin.textContent = label;
-        return pin;
-      }));
-    });
-    filters.append(button);
-  }
-  filters.firstElementChild.click();
 }
