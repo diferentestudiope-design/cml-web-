@@ -20,21 +20,20 @@
 .project-section { padding-block: clamp(52px, 7vw, 100px); }
 .project-section h2 { color: var(--project-blue); font-size: clamp(2rem, 4vw, 3.7rem); margin-bottom: 24px; }
 .project-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: clamp(24px, 5vw, 80px); }
-.project-overview { width: min(calc(100% - 80px), 1380px); grid-template-columns: minmax(0, .82fr) minmax(0, 1fr); gap: clamp(48px, 6vw, 96px); padding-block: clamp(64px, 8vw, 120px); font-family: Manrope, Inter, var(--sans); }
-.overview-visual { display: grid; gap: clamp(28px, 4vw, 56px); }
-.overview-brand { justify-self: center; display: inline-flex; padding: 0; }
-.overview-brand img { width: clamp(146px, 16vw, 224px); height: auto; }
-.project-building { aspect-ratio: 1.14; border-radius: 0 32px 0 32px; clip-path: polygon(0 0, 100% 6%, 100% 100%, 3% 94%); }
-.overview-copy { padding-top: 4px; }
-.overview-copy h2 { text-align: center; margin-bottom: clamp(24px, 3.5vw, 48px); }
-.overview-copy > p { font-size: clamp(1rem, 1.45vw, 1.25rem); line-height: 1.75; }
-.project-amenities { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; list-style: none; padding: 0; margin: clamp(34px, 4.5vw, 58px) 0; }
-.project-amenities li { display: grid; justify-items: center; align-content: start; gap: 14px; text-align: center; font-size: clamp(.75rem, 1.1vw, .95rem); line-height: 1.45; text-wrap: balance; font-weight: 700; color: var(--project-blue); }
-.project-amenities svg { width: clamp(36px, 4.1vw, 58px); aspect-ratio: 1; fill: none; stroke: var(--hero-accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.overview-note { padding-top: 26px; border-top: 1px solid #103e6338; }
-.overview-note .sample-note { margin-top: 12px; font-size: 1rem; line-height: 1.65; }
-.overview-copy .project-actions { justify-content: center; gap: 16px; margin-top: clamp(28px, 4vw, 56px); }
-.overview-copy .project-actions .pill { justify-content: center; min-height: 54px; padding-inline: clamp(16px, 2vw, 28px); }
+.project-overview { width: min(74.5vw, 1380px); grid-template-columns: minmax(0, 43.5fr) minmax(0, 50fr); column-gap: 6.5%; padding-block: clamp(58px, 6vw, 112px); font-family: Manrope, Inter, var(--sans); }
+.overview-visual { display: grid; gap: clamp(26px, 3vw, 52px); }
+.overview-brand { justify-self: center; display: inline-flex; }
+.overview-brand img { width: clamp(160px, 14.5vw, 258px); height: auto; }
+.project-building { aspect-ratio: 1.17; border-radius: 0 28px 0 28px; clip-path: polygon(0 0, 97% 8%, 100% 100%, 3% 92%); }
+.overview-copy h2 { text-align: center; font-size: clamp(1.8rem, 2.65vw, 3rem); font-weight: 600; letter-spacing: -.035em; margin-bottom: clamp(24px, 2.7vw, 46px); }
+.overview-copy > p, .overview-note { font-size: clamp(1rem, 1.43vw, 1.45rem); line-height: 1.5; }
+.project-amenities { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; list-style: none; padding: 0; margin: clamp(36px, 4.35vw, 78px) 0 clamp(26px, 3.1vw, 60px); }
+.project-amenities li { display: grid; justify-items: center; align-content: start; gap: clamp(12px, 1.9vw, 30px); text-align: center; font-size: clamp(.73rem, 1.05vw, 1.1rem); line-height: 1.35; text-wrap: balance; font-weight: 700; color: var(--project-blue); }
+.project-amenities svg { width: clamp(34px, 4.25vw, 66px); aspect-ratio: 1; fill: none; stroke: var(--hero-accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.overview-note strong { font-weight: 600; }
+.overview-note .sample-note { margin-top: clamp(14px, 1.6vw, 28px); font-size: inherit; line-height: inherit; }
+.overview-copy .project-actions { justify-content: center; gap: clamp(8px, 1.4vw, 24px); margin-top: clamp(36px, 6vw, 110px); }
+.overview-copy .project-actions .pill { justify-content: center; gap: 8px; min-height: clamp(44px, 4vw, 68px); padding-inline: clamp(10px, 1.45vw, 26px); font-size: clamp(.8rem, 1.14vw, 1.12rem); }
 .project-actions, .project-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
 .project-primary, .project-filters .pill[aria-pressed=true] { background: var(--hero-accent); color: #fff; }
 .project-outline { border-color: var(--project-blue); background: white; color: var(--project-blue); }

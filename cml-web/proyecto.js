@@ -25,7 +25,7 @@ function renderProject(project) {
     project.rooms + " con áreas referenciales de " + project.area + " a " + project.maxArea + " m². " +
     project.description + " La ubicación de ejemplo es " + project.location +
     ". Las áreas comunes ilustran espacios para trabajar, leer y compartir. " +
-    "Explora la galería y compara las distribuciones para conocer cómo podrían adaptarse a tu rutina.";
+    "Explora la galería y compara las distribuciones.";
   select("#direccion-zona").textContent = project.location + " · Dirección ficticia";
   const facts = [
     ["Ubicación", project.location, "location"],
