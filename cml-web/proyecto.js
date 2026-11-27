@@ -124,8 +124,7 @@ function renderUpcoming(project) {
   document.querySelector("#nombre-proyecto").textContent = project.name;
   document.querySelector("#estado").textContent = projectStatuses.upcoming;
   document.querySelector("#portada").src = "./assets/" + project.image;
-  document.querySelector("#logo-lanzamiento").hidden = false;
-  document.querySelector(".project-banner").classList.add("launch-banner");
+  document.querySelector("#portada").alt = "Edificio cubierto con una manta de Constructora Moreno Linch";
   for (const selector of ["#datos", "#datos-nota", "#sobre-proyecto", "#galeria", "#cotizar", "#zona"]) {
     document.querySelector(selector).hidden = true;
   }

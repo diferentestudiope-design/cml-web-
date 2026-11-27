@@ -255,6 +255,5 @@ footer.section { padding-bottom: 35px; }
   .header nav { overflow-y: auto; }
 }
 
-.card-image .teaser-logo { position: absolute; top: 54%; left: 50%; translate: -50% -50%; width: 37%; height: auto; object-fit: contain; opacity: .93; filter: drop-shadow(0 1px 2px #10254966); }
 .card-button[data-status="upcoming"] .card-status { background: var(--hero-accent); }
 .card-button[data-status="sold"] .card-status { background: #4e5961; }

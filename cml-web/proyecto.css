@@ -107,9 +107,3 @@
 .residential-amenities { display: flex; flex-wrap: wrap; gap: 10px; }
 .residential-amenities li { padding: 9px 13px; border-radius: 999px; background: #f3f5f6; }
 [hidden] { display: none !important; }
-
-.project-banner .launch-logo { position: absolute; inset: 54% 19% auto auto; z-index: 0; width: clamp(90px, 22vw, 300px); height: auto; opacity: .93; translate: 0 -50%; }
-.launch-banner .banner-text { position: relative; }
-@media (max-width: 700px) {
-  .project-banner .launch-logo { inset: auto 24px 24px auto; translate: none; }
-}
